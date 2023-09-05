@@ -1,0 +1,23 @@
+.chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: fit-content;
+    min-width: 6.25rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+
+    &--contained {
+        background-color: var(--foreground-invisible);
+    }
+
+    &--outlined {
+        border: solid 0.125rem var(--foreground-opacity);
+    }
+}
+
+.delete {
+    padding: 0.25rem;
+}

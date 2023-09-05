@@ -60,7 +60,14 @@ module.exports = {
         'import/order': [
             'error',
             {
-                groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                groups: [
+                    'builtin',
+                    'external',
+                    'internal',
+                    'parent',
+                    'sibling',
+                    'index',
+                ],
                 pathGroups: [
                     {
                         pattern: 'react*',
@@ -109,7 +116,7 @@ module.exports = {
                 semi: true,
                 trailingComma: 'all',
                 singleQuote: true,
-                printWidth: 100,
+                printWidth: 80,
                 tabWidth: 4,
             },
         ],

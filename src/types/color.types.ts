@@ -1,0 +1,38 @@
+// NOTE: should be synchronized with styles/global.scss
+export enum EColorClassNames {
+    background = 'background-color',
+    backgroundOpacity = 'background-opacity-color',
+    backgroundInvisible = 'background-invisible-color',
+    foreground = 'foreground-color',
+    foregroundOpacity = 'foreground-opacity-color',
+    foregroundInvisible = 'foreground-invisible-color',
+    middle = 'middle-color',
+    red = 'red-color',
+    error = 'error-color',
+    green = 'green-color',
+    success = 'success-color',
+    blue = 'blue-color',
+    info = 'info-color',
+    disabled = 'disabled-color',
+    gray = 'gray-color',
+    grayLight = 'gray-light-color',
+}
+
+export enum EBackgroundClassNames {
+    background = 'primary-background',
+    backgroundOpacity = 'primary-opacity-background',
+    backgroundInvisible = 'primary-invisible-background',
+    foreground = 'secondary-background',
+    foregroundOpacity = 'secondary-opacity-background',
+    foregroundInvisible = 'secondary-invisible-background',
+    middle = 'middle-background',
+    red = 'red-background',
+    error = 'error-background',
+    green = 'green-background',
+    success = 'success-background',
+    blue = 'blue-background',
+    info = 'info-background',
+    disabled = 'disabled-background',
+    gray = 'gray-background',
+    grayLight = 'gray-light-background',
+}

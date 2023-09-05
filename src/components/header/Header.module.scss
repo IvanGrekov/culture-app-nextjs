@@ -1,0 +1,48 @@
+@import 'styles/variables.scss';
+@import 'styles/extends.scss';
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $zindex-header;
+    width: 100%;
+    height: $header-size;
+
+    backdrop-filter: $overlay-backdrop-filter;
+    background-color: var(--background-opacity);
+    box-shadow: var(--header-box-shadow);
+    transition: height $base-transition-duration cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (max-width: $screen-md) {
+        height: $header-mobile-size;
+    }
+
+    &--fixed {
+        height: $header-fixed-size;
+    }
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.content {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 $default-spacing-md;
+
+    @media (max-width: $screen-md) {
+        padding: 0 $default-spacing-sm;
+    }
+}
+
+.sidebar-layout {
+    @extend .sidebar-layout-extend;
+}

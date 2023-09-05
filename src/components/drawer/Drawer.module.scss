@@ -1,0 +1,84 @@
+@import 'styles/variables.scss';
+
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $zindex-drawer;
+    width: 100vw;
+    height: 0;
+
+    background: var(--backdrop);
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity $base-transition-duration linear 0s,
+        height 0s linear $base-transition-duration;
+
+    &--open {
+        height: 100vh;
+        opacity: 1;
+        transition: opacity $base-transition-duration linear
+                $base-transition-duration,
+            height 0s linear 0s;
+    }
+
+    &--right {
+        background: var(--backdrop-reverse);
+    }
+}
+
+.content-wrapper {
+    position: fixed;
+    top: 0;
+    left: -$drawer-size;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: $drawer-size;
+    padding: $default-spacing-md;
+
+    background: var(--background);
+    overflow: hidden;
+    transition: left $base-transition-duration linear 0s;
+
+    @media (max-width: $screen-md) {
+        padding: $default-spacing-sm;
+    }
+
+    &--open {
+        left: 0;
+        transition: left $base-transition-duration linear
+            $base-transition-duration;
+    }
+
+    &--right {
+        left: auto;
+        right: -$drawer-size;
+        transition: right $base-transition-duration linear 0s;
+
+        &.content-wrapper--open {
+            right: 0;
+            transition: right $base-transition-duration linear
+                $base-transition-duration;
+        }
+    }
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: auto;
+
+    &--shrinked {
+        flex-grow: 0;
+        height: 87%;
+    }
+}
+
+.close-button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: $default-spacing-lg;
+    align-self: center;
+}

@@ -1,0 +1,4 @@
+import { TTypographyVariants } from 'components/typography/types';
+
+export const INPUT_LABEL_TYPOGRAPHY_VARIANT: TTypographyVariants = 'body1';
+export const INPUT_ICON_SIZE = 35;

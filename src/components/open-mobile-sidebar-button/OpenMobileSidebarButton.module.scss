@@ -1,0 +1,7 @@
+.button {
+    display: none !important;
+
+    &--visible {
+        display: flex !important;
+    }
+}
