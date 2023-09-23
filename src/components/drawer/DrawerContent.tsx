@@ -9,6 +9,7 @@ import CloseIcon from 'components/icons/CloseIcon';
 export default function DrawerContent({
     isOpen,
     children,
+    header,
     shouldAddCloseButton = true,
     position = 'left',
     style,
@@ -30,6 +31,7 @@ export default function DrawerContent({
                         styles[`content-wrapper--${position}`],
                         {
                             [styles['content-wrapper--open']]: isOpen,
+                            [styles['content-wrapper--with-header']]: header,
                         },
                     )}
                     onClick={(event): void => {
@@ -37,9 +39,12 @@ export default function DrawerContent({
                     }}
                     style={style}
                 >
+                    {header && <div className={styles['header']}>{header}</div>}
+
                     <div
                         className={cx(styles.content, {
-                            [styles['content--shrinked']]: shouldAddCloseButton,
+                            [styles['content--shrinked']]:
+                                shouldAddCloseButton && header,
                         })}
                     >
                         {children}
@@ -49,7 +54,7 @@ export default function DrawerContent({
                         <div className={styles['close-button-wrapper']}>
                             <Button
                                 text="Close"
-                                variant="ghost"
+                                variant="outlined"
                                 Icon={CloseIcon}
                                 onClick={onClose}
                             />

@@ -38,7 +38,7 @@ export default function RootLayout({
                                 styles['header-spacing'],
                             )}
                         >
-                            <Sidebar shouldAddCloseButton={true}>
+                            <Sidebar>
                                 <NavigationList />
                             </Sidebar>
 

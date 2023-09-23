@@ -5,9 +5,13 @@ import { PropsWithChildren } from 'react';
 import cx from 'classnames';
 
 import styles from 'components/header/Header.module.scss';
-import { useIsHeaderFixed } from 'components/header/hooks';
+import {
+    useIsHeaderFixed,
+    useShouldShowThemeSwitcher,
+} from 'components/header/hooks';
 import OpenMobileSidebarButton from 'components/open-mobile-sidebar-button/OpenMobileSidebarButton';
 import PageLoadingIndicator from 'components/page-loading/PageLoadingIndicator';
+import ThemeSwitcher from 'components/theme-switcher/ThemeSwitcher';
 
 interface IHeaderProps extends PropsWithChildren {
     className?: string;
@@ -20,6 +24,7 @@ export default function Header({
     children,
 }: IHeaderProps): JSX.Element {
     const { isFixed } = useIsHeaderFixed();
+    const shouldShowThemeSwitcher = useShouldShowThemeSwitcher();
 
     return (
         <header
@@ -33,8 +38,12 @@ export default function Header({
             )}
         >
             <PageLoadingIndicator className={styles.loading} />
+
             <div className={styles.content}>
                 <OpenMobileSidebarButton />
+
+                {shouldShowThemeSwitcher && <ThemeSwitcher />}
+
                 {children}
             </div>
         </header>

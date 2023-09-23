@@ -14,20 +14,18 @@ interface IOpenMobileSidebarButtonProps {
 
 export default function OpenMobileSidebarButton({
     className,
-}: IOpenMobileSidebarButtonProps): JSX.Element {
+}: IOpenMobileSidebarButtonProps): JSX.Element | null {
     const { isVisible, onClick } = useOpenMobileSidebarButton();
+
+    if (!isVisible) {
+        return null;
+    }
 
     return (
         <Tooltip text="Open Sidebar" position="bottom">
             <IconButton
                 Icon={BurgerIcon}
-                className={cx(
-                    styles.button,
-                    {
-                        [styles['button--visible']]: isVisible,
-                    },
-                    className,
-                )}
+                className={cx(styles.button, className)}
                 onClick={onClick}
             />
         </Tooltip>

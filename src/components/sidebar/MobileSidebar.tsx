@@ -3,18 +3,13 @@ import { useMobileSidebar } from 'components/sidebar/hooks';
 import { TSidebarProps } from 'components/sidebar/types';
 
 export default function MobileSidebar({
-    shouldAddCloseButton,
     children,
+    ...rest
 }: TSidebarProps): JSX.Element {
     const { isOpen, onClose } = useMobileSidebar();
 
     return (
-        <Drawer
-            isOpen={isOpen}
-            position="left"
-            shouldAddCloseButton={shouldAddCloseButton}
-            onClose={onClose}
-        >
+        <Drawer isOpen={isOpen} position="left" onClose={onClose} {...rest}>
             {children}
         </Drawer>
     );

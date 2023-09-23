@@ -63,6 +63,12 @@
             border-color: var(--green);
         }
 
+        .icon {
+            svg {
+                fill: var(--background);
+            }
+        }
+
         &:hover,
         &.button--active {
             border-color: var(--hover);

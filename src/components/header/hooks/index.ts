@@ -1,6 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 
+import { MOBILE_SIDEBAR_SCREEN_SIZES } from 'constants/mobileSidebar';
+import { useWindowSize } from 'hooks/windowSize.hooks';
+
 type TUseIsHeaderFixed = () => { isFixed: boolean };
+
 export const useIsHeaderFixed: TUseIsHeaderFixed = () => {
     const prevScrollYRef = useRef(0);
     const [isFixed, setIsFixed] = useState(false);
@@ -29,4 +33,10 @@ export const useIsHeaderFixed: TUseIsHeaderFixed = () => {
     }, []);
 
     return { isFixed };
+};
+
+export const useShouldShowThemeSwitcher = (): boolean => {
+    const windowSize = useWindowSize();
+
+    return !MOBILE_SIDEBAR_SCREEN_SIZES.includes(windowSize);
 };
