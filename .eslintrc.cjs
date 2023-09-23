@@ -37,7 +37,7 @@ module.exports = {
         'no-console':
             process.env.NODE_ENV === 'production'
                 ? ['error', { allow: ['warn', 'error'] }]
-                : ['warn', { allow: ['warn', 'error'] }],
+                : ['warn', { allow: ['warn', 'error', 'log'] }],
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/no-explicit-any':
             process.env.NODE_ENV === 'production' ? 'error' : 'warn',
