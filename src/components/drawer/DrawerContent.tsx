@@ -54,7 +54,7 @@ export default function DrawerContent({
                         <div className={styles['close-button-wrapper']}>
                             <Button
                                 text="Close"
-                                variant="outlined"
+                                variant="ghost"
                                 Icon={CloseIcon}
                                 onClick={onClose}
                             />
