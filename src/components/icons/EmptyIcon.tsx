@@ -4,9 +4,10 @@ import { IIconProps } from 'components/icons/types';
 export default function EmptyIcon({
     size,
     className,
+    wrapperClassName,
 }: IIconProps): JSX.Element {
     return (
-        <IconWrapper size={size}>
+        <IconWrapper size={size} className={wrapperClassName}>
             <svg
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,9 +1,13 @@
 import IconWrapper from 'components/icons/IconWrapper';
 import { IIconProps } from 'components/icons/types';
 
-export default function EditIcon({ size, className }: IIconProps): JSX.Element {
+export default function EditIcon({
+    size,
+    className,
+    wrapperClassName,
+}: IIconProps): JSX.Element {
     return (
-        <IconWrapper size={size}>
+        <IconWrapper size={size} className={wrapperClassName}>
             <svg
                 className={className}
                 width="64"

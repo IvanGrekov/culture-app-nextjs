@@ -4,11 +4,13 @@ import { IIconProps, EIconSizes } from 'components/icons/types';
 export default function CloseIcon({
     size = EIconSizes.small,
     className,
+    wrapperClassName,
 }: IIconProps): JSX.Element {
-    const formattedSize = size * 0.75;
+    const formattedSize =
+        (typeof size === 'number' ? size : EIconSizes[size]) * 0.75;
 
     return (
-        <IconWrapper size={formattedSize}>
+        <IconWrapper size={formattedSize} wrapperClassName={wrapperClassName}>
             <svg
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

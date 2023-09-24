@@ -1,9 +1,13 @@
 import IconWrapper from 'components/icons/IconWrapper';
 import { IIconProps } from 'components/icons/types';
 
-export default function AddIcon({ size, className }: IIconProps): JSX.Element {
+export default function AddIcon({
+    size,
+    className,
+    wrapperClassName,
+}: IIconProps): JSX.Element {
     return (
-        <IconWrapper size={size}>
+        <IconWrapper size={size} className={wrapperClassName}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"

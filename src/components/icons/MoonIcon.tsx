@@ -1,9 +1,13 @@
 import IconWrapper from 'components/icons/IconWrapper';
 import { IIconProps } from 'components/icons/types';
 
-export default function MoonIcon({ size, className }: IIconProps): JSX.Element {
+export default function MoonIcon({
+    size,
+    className,
+    wrapperClassName,
+}: IIconProps): JSX.Element {
     return (
-        <IconWrapper size={size}>
+        <IconWrapper size={size} className={wrapperClassName}>
             <svg
                 width="64"
                 version="1.1"

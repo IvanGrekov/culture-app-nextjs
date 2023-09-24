@@ -10,5 +10,6 @@ export interface IIconProps {
     size?: number | keyof typeof EIconSizes;
     color?: string;
     className?: string;
+    wrapperClassName?: string;
     style?: CSSProperties;
 }

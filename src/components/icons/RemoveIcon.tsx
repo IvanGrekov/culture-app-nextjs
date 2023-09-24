@@ -4,11 +4,13 @@ import { IIconProps, EIconSizes } from 'components/icons/types';
 export default function RemoveIcon({
     size = EIconSizes.small,
     className,
+    wrapperClassName,
 }: IIconProps): JSX.Element {
-    const formattedSize = size * 0.8;
+    const formattedSize =
+        (typeof size === 'number' ? size : EIconSizes[size]) * 0.8;
 
     return (
-        <IconWrapper size={formattedSize}>
+        <IconWrapper size={formattedSize} wrapperClassName={wrapperClassName}>
             <svg
                 enableBackground="new 0 0 40 40"
                 viewBox="0 0 40 40"

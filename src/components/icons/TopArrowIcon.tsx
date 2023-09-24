@@ -4,9 +4,10 @@ import { IIconProps } from 'components/icons/types';
 export default function TopArrowIcon({
     size,
     className,
+    wrapperClassName,
 }: IIconProps): JSX.Element {
     return (
-        <IconWrapper size={size}>
+        <IconWrapper size={size} className={wrapperClassName}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
