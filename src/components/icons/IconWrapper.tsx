@@ -7,14 +7,14 @@ import { IIconProps, EIconSizes } from 'components/icons/types';
 
 export default function IconWrapper({
     size = EIconSizes.small,
-    wrapperClassName,
+    className,
     children,
 }: IIconProps & PropsWithChildren): JSX.Element {
     const formattedSize = typeof size === 'number' ? size : EIconSizes[size];
 
     return (
         <div
-            className={cx(styles.wrapper, wrapperClassName)}
+            className={cx(styles.wrapper, className)}
             style={{
                 width: formattedSize,
                 height: formattedSize,
