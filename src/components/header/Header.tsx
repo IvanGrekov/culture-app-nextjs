@@ -37,12 +37,16 @@ export default function Header({
         >
             <PageLoadingIndicator className={styles.loading} />
 
-            <div className={styles.content}>
+            <div className={styles['content-wrapper']}>
                 <OpenMobileSidebarButton />
 
-                {shouldShowThemeSwitcher && <ThemeSwitcher />}
+                <div className={styles.content}>
+                    {shouldShowThemeSwitcher && (
+                        <ThemeSwitcher tooltipPosition="left" />
+                    )}
 
-                {children}
+                    {children}
+                </div>
             </div>
         </header>
     );

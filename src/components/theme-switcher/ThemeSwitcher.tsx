@@ -2,27 +2,24 @@
 
 import cx from 'classnames';
 
-import IconButton from 'components/button/IconButton';
+import MoonIcon from 'components/icons/MoonIcon';
+import SunIcon from 'components/icons/SunIcon';
 import styles from 'components/theme-switcher/ThemeSwitcher.module.scss';
 import { useUserThemeValue } from 'components/theme-switcher/hooks';
-import {
-    getThemeSwitcherIcon,
-    getThemeSwitcherTitle,
-} from 'components/theme-switcher/utils';
 import Tooltip from 'components/tooltip/Tooltip';
+import { TTooltipPosition } from 'components/tooltip/types';
 import { ETheme } from 'types/theme.types';
 
 interface IThemeSwitcherProps {
-    className?: string;
+    tooltipPosition?: TTooltipPosition;
 }
 
 export default function ThemeSwitcher({
-    className,
+    tooltipPosition = 'bottom',
 }: IThemeSwitcherProps): JSX.Element {
     const { localStorageValue, setLocalStorageValue } = useUserThemeValue();
 
-    const title = getThemeSwitcherTitle(localStorageValue);
-    const Icon = getThemeSwitcherIcon(localStorageValue);
+    const isDarkTheme = localStorageValue === ETheme.dark;
 
     const onClick = (): void => {
         setLocalStorageValue((prevValue) =>
@@ -31,12 +28,17 @@ export default function ThemeSwitcher({
     };
 
     return (
-        <Tooltip text={title} position="bottom">
-            <IconButton
-                Icon={Icon}
-                className={cx(styles.button, className)}
-                onClick={onClick}
-            />
+        <Tooltip text="Change Theme" position={tooltipPosition}>
+            <button className={styles.container} onClick={onClick}>
+                <SunIcon className={styles.icon} />
+                <MoonIcon className={styles.icon} />
+
+                <span
+                    className={cx(styles.switcher, {
+                        [styles['switcher--shifted']]: isDarkTheme,
+                    })}
+                />
+            </button>
         </Tooltip>
     );
 }

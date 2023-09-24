@@ -9,7 +9,6 @@
     left: 0;
     right: 0;
     z-index: $zindex-header;
-    width: 100%;
 
     backdrop-filter: $overlay-backdrop-filter;
     background-color: var(--background-opacity);
@@ -27,10 +26,15 @@
     right: 0;
 }
 
+.content-wrapper,
 .content {
     display: flex;
     justify-self: center;
     align-items: center;
+    height: 100%;
+}
+
+.content-wrapper {
     justify-content: space-between;
     height: 100%;
     padding: 0 $default-spacing-md;
@@ -38,6 +42,11 @@
     @media (max-width: $screen-md) {
         padding: 0 $default-spacing-sm;
     }
+}
+
+.content {
+    flex-grow: 1;
+    justify-content: flex-end;
 }
 
 .sidebar-layout {
