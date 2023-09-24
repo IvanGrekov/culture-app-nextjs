@@ -3,6 +3,7 @@ import FocusTrap from 'focus-trap-react';
 
 import Button from 'components/button/Button';
 import styles from 'components/drawer/Drawer.module.scss';
+import DrawerHeader from 'components/drawer/DrawerHeader';
 import { IDrawerProps } from 'components/drawer/types';
 import CloseIcon from 'components/icons/CloseIcon';
 
@@ -39,11 +40,11 @@ export default function DrawerContent({
                     }}
                     style={style}
                 >
-                    {header && <div className={styles['header']}>{header}</div>}
+                    {header && <DrawerHeader>{header}</DrawerHeader>}
 
                     <div
                         className={cx(styles.content, {
-                            [styles['content--shrinked']]:
+                            [styles['content--compressed']]:
                                 shouldAddCloseButton && header,
                         })}
                     >

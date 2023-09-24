@@ -1,4 +1,5 @@
 @import 'styles/variables.scss';
+@import 'styles/extends.scss';
 
 .drawer {
     position: fixed;
@@ -78,16 +79,23 @@
     flex-grow: 1;
     overflow-y: auto;
 
-    &--shrinked {
+    &--compressed {
         flex-grow: 0;
         height: 84%;
     }
 }
 
 .header {
+    @extend .header-size-extend;
+
     display: flex;
     justify-content: center;
+    align-items: center;
     border-bottom: 1px solid var(--foreground-invisible);
+
+    &--compressed {
+        @extend .header-compressed-size-extend;
+    }
 }
 
 .close-button-wrapper {

@@ -5,13 +5,11 @@ import { PropsWithChildren } from 'react';
 import cx from 'classnames';
 
 import styles from 'components/header/Header.module.scss';
-import {
-    useIsHeaderFixed,
-    useShouldShowThemeSwitcher,
-} from 'components/header/hooks';
+import { useShouldShowThemeSwitcher } from 'components/header/hooks';
 import OpenMobileSidebarButton from 'components/open-mobile-sidebar-button/OpenMobileSidebarButton';
 import PageLoadingIndicator from 'components/page-loading/PageLoadingIndicator';
 import ThemeSwitcher from 'components/theme-switcher/ThemeSwitcher';
+import { useIsHeaderFixed } from 'hooks/header.hooks';
 
 interface IHeaderProps extends PropsWithChildren {
     className?: string;

@@ -132,3 +132,16 @@
     max-width: 90%;
     translate: 0 -55%;
 }
+
+.header-size-extend {
+    height: $header-size;
+    transition: height $base-transition-duration cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (max-width: $screen-md) {
+        height: $header-mobile-size;
+    }
+}
+
+.header-compressed-size-extend {
+    height: $header-compressed-size;
+}
