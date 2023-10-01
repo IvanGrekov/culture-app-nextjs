@@ -92,7 +92,7 @@ export default function TextField({
                 />
 
                 <TextFieldLabel
-                    id={id}
+                    htmlFor={id}
                     label={label}
                     required={required}
                     disabled={disabled}
@@ -103,7 +103,7 @@ export default function TextField({
 
                 {!shouldHidePlaceholder && (
                     <TextFieldPlaceholder
-                        id={id}
+                        htmlFor={id}
                         placeholder={placeholder}
                         required={required}
                         disabled={disabled}

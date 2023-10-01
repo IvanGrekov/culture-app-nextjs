@@ -6,7 +6,7 @@
 }
 
 .input {
-    @extend .hidden-native-input;
+    @extend .hidden-native-input-extend;
 }
 
 .label {

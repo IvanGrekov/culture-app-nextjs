@@ -2,7 +2,7 @@
 @import 'styles/extends.scss';
 
 .input {
-    @extend .hidden-native-input;
+    @extend .hidden-native-input-extend;
 }
 
 .label {

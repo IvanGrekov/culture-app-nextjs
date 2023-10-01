@@ -1,0 +1,100 @@
+@import 'styles/variables.scss';
+@import 'styles/extends.scss';
+
+.native-select {
+    @extend .hidden-native-input-extend;
+
+    visibility: visible;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        & ~ .select {
+            border-color: var(--hover) !important;
+        }
+    }
+}
+
+.native-select,
+.select {
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        ~ .arrow-button {
+            svg {
+                fill: var(--hover);
+                transition: fill $input-transition-duration
+                    $input-transition-function;
+            }
+        }
+    }
+}
+
+.select-wrapper,
+.select,
+.label,
+.placeholder {
+    cursor: pointer;
+}
+
+.label,
+.placeholder {
+    & *,
+    &::after,
+    &::before {
+        cursor: pointer;
+    }
+}
+
+.select-wrapper {
+    &:hover {
+        .select {
+            border-color: var(--hover) !important;
+        }
+    }
+}
+
+.select {
+    @extend .text-field-extend;
+
+    height: $input-height;
+
+    &--filled {
+        & ~ .placeholder {
+            display: none;
+        }
+    }
+
+    &--disabled {
+        @extend .input-disabled-state-extend;
+    }
+
+    &--error,
+    &--error:hover,
+    &--error:focus,
+    &--error:active {
+        @extend .input-error-state-extend;
+    }
+}
+
+.arrow-button {
+    position: absolute;
+    right: calc(#{$input-inline-spacing} * 1.5);
+    top: 50%;
+    translate: 0 -50%;
+    padding-right: 0;
+
+    &--error {
+        svg {
+            fill: var(--red);
+        }
+    }
+
+    &--disabled {
+        @extend .cursor-not-allowed-extend;
+
+        svg {
+            fill: var(--disabled);
+        }
+    }
+}

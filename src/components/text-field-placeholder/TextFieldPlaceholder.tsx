@@ -1,3 +1,5 @@
+import { forwardRef, Ref } from 'react';
+
 import cx from 'classnames';
 
 import InputLabelRequiredMark from 'components/input-label-required-mark/InputLabelRequiredMark';
@@ -5,7 +7,7 @@ import TextFieldLabelText from 'components/text-field-label-text/TextFieldLabelT
 import styles from 'components/text-field-placeholder/TextFieldPlaceholder.module.scss';
 
 interface ITextFieldPlaceholderProps {
-    id: string;
+    htmlFor: string;
     placeholder?: string;
     isFieldFilled: boolean;
     error?: string;
@@ -14,22 +16,26 @@ interface ITextFieldPlaceholderProps {
     className?: string;
 }
 
-export default function TextFieldPlaceholder({
-    id,
-    placeholder,
-    isFieldFilled,
-    error,
-    required,
-    disabled,
-    className,
-}: ITextFieldPlaceholderProps): JSX.Element | null {
+const TextFieldPlaceholder = (
+    {
+        htmlFor,
+        placeholder,
+        isFieldFilled,
+        error,
+        required,
+        disabled,
+        className,
+    }: ITextFieldPlaceholderProps,
+    ref: Ref<HTMLLabelElement>,
+): JSX.Element | null => {
     if (!placeholder || isFieldFilled) {
         return null;
     }
 
     return (
         <label
-            htmlFor={id}
+            ref={ref}
+            htmlFor={htmlFor}
             className={cx(
                 styles.placeholder,
                 {
@@ -49,4 +55,6 @@ export default function TextFieldPlaceholder({
             </>
         </label>
     );
-}
+};
+
+export default forwardRef(TextFieldPlaceholder);

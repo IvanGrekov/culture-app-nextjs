@@ -1,48 +1,46 @@
 import cx from 'classnames';
 
 import InputContainer from 'components/input-container/InputContainer';
+import ArrowButton from 'components/select/ArrowButton';
+import styles from 'components/select/Select.module.scss';
+import { useSelectField } from 'components/select/hooks';
+import { TSelectProps } from 'components/select/types';
 import TextFieldLabel from 'components/text-field-label/TextFieldLabel';
 import TextFieldPlaceholder from 'components/text-field-placeholder/TextFieldPlaceholder';
 import TextFieldWrapper from 'components/text-field-wrapper/TextFieldWrapper';
-import styles from 'components/textarea/Textarea.module.scss';
-import { useTextarea } from 'components/textarea/hooks';
-import { TTextareaProps } from 'components/textarea/types';
 
-export default function Textarea({
+export default function Select<T>({
+    name,
     error,
     required,
     disabled,
     label,
-    placeholder = label || 'Enter value',
+    placeholder = label || 'Select option',
     shouldHidePlaceholder,
-    rows = 5,
-    disableResize,
     containerClassName,
     labelClassName,
     placeholderClassName,
     errorClassName,
     textFieldWrapperClassName,
+    arrowButtonClassName,
     className,
+    onChange,
     onFocus,
     onBlur,
-    onChange,
     onClick,
-    ...rest
-}: TTextareaProps): JSX.Element {
+}: TSelectProps<T>): JSX.Element {
     const {
-        textareaRef,
+        nativeSelectRef,
+        customSelectRef,
         id,
-        isTextareaFilled,
+        isOpen,
         isFocused,
-        onTextareaFocus,
-        onTextareaBlur,
-        onTextareaClick,
-        onTextareaChange,
-    } = useTextarea({
+        isFieldFilled,
+    } = useSelectField<T>({
         onFocus,
         onBlur,
-        onClick,
         onChange,
+        onClick,
     });
 
     return (
@@ -54,29 +52,42 @@ export default function Textarea({
         >
             <TextFieldWrapper
                 disabled={disabled}
-                className={textFieldWrapperClassName}
+                className={cx(
+                    textFieldWrapperClassName,
+                    styles['select-wrapper'],
+                )}
             >
-                <textarea
-                    ref={textareaRef}
+                <select
+                    ref={nativeSelectRef}
                     id={id}
+                    name={name}
                     disabled={disabled}
-                    autoComplete="off"
-                    rows={rows}
-                    {...rest}
+                    className={styles['native-select']}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onClick={onClick}
+                />
+
+                <div
+                    ref={customSelectRef}
                     className={cx(
-                        styles.textarea,
+                        styles.select,
                         {
-                            [styles['textarea--disabled']]: disabled,
-                            [styles['textarea--error']]: error,
-                            [styles['textarea--filled']]: isTextareaFilled,
-                            [styles['textarea--not-resizing']]: disableResize,
+                            [styles['select--focused']]: isFocused,
+                            [styles['select--open']]: isOpen,
+                            [styles['select--filled']]: isFieldFilled,
+                            [styles['select--disabled']]: disabled,
+                            [styles['select--error']]: error,
                         },
                         className,
                     )}
-                    onFocus={onTextareaFocus}
-                    onBlur={onTextareaBlur}
-                    onClick={onTextareaClick}
-                    onChange={onTextareaChange}
+                />
+
+                <ArrowButton
+                    error={error}
+                    disabled={disabled}
+                    isOpen={isOpen}
+                    arrowButtonClassName={arrowButtonClassName}
                 />
 
                 <TextFieldLabel
@@ -101,7 +112,7 @@ export default function Textarea({
                         placeholder={placeholder}
                         required={required}
                         disabled={disabled}
-                        isFieldFilled={isTextareaFilled}
+                        isFieldFilled={isFieldFilled}
                         error={error}
                         className={cx(styles.placeholder, placeholderClassName)}
                     />
