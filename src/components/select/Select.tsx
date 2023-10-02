@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import FocusTrap from 'focus-trap-react';
 
 import InputContainer from 'components/input-container/InputContainer';
 import ArrowButton from 'components/select/ArrowButton';
@@ -27,7 +28,6 @@ export default function Select<T>({
     onChange,
     onFocus,
     onBlur,
-    onClick,
 }: TSelectProps<T>): JSX.Element {
     const {
         nativeSelectRef,
@@ -36,88 +36,110 @@ export default function Select<T>({
         isOpen,
         isFocused,
         isFieldFilled,
+        onSelectFocus,
+        onSelectBlur,
+        onSelectChange,
+        onWrapperClick,
+        onWrapperBlur,
     } = useSelectField<T>({
         onFocus,
         onBlur,
         onChange,
-        onClick,
     });
 
     return (
-        <InputContainer
-            error={error}
-            disabled={disabled}
-            className={containerClassName}
-            errorClassName={errorClassName}
-        >
-            <TextFieldWrapper
+        <>
+            <InputContainer
+                error={error}
                 disabled={disabled}
-                className={cx(
-                    textFieldWrapperClassName,
-                    styles['select-wrapper'],
-                )}
+                className={containerClassName}
+                errorClassName={errorClassName}
             >
-                <select
-                    ref={nativeSelectRef}
-                    id={id}
-                    name={name}
-                    disabled={disabled}
-                    className={styles['native-select']}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onClick={onClick}
-                />
+                <FocusTrap
+                    active={isOpen}
+                    focusTrapOptions={{
+                        clickOutsideDeactivates: true,
+                        onDeactivate: onWrapperBlur,
+                    }}
+                >
+                    <div
+                        className={styles['select-wrapper']}
+                        onClick={onWrapperClick}
+                    >
+                        <TextFieldWrapper
+                            disabled={disabled}
+                            className={textFieldWrapperClassName}
+                        >
+                            <select
+                                ref={nativeSelectRef}
+                                id={id}
+                                name={name}
+                                disabled={disabled}
+                                className={styles['native-select']}
+                                onFocus={onSelectFocus}
+                                onBlur={onSelectBlur}
+                                onChange={onSelectChange}
+                            />
 
-                <div
-                    ref={customSelectRef}
-                    className={cx(
-                        styles.select,
-                        {
-                            [styles['select--focused']]: isFocused,
-                            [styles['select--open']]: isOpen,
-                            [styles['select--filled']]: isFieldFilled,
-                            [styles['select--disabled']]: disabled,
-                            [styles['select--error']]: error,
-                        },
-                        className,
-                    )}
-                />
+                            <div
+                                ref={customSelectRef}
+                                className={cx(
+                                    styles.select,
+                                    {
+                                        [styles['select--focused']]: isFocused,
+                                        [styles['select--open']]: isOpen,
+                                        [styles['select--filled']]:
+                                            isFieldFilled,
+                                        [styles['select--disabled']]: disabled,
+                                        [styles['select--error']]: error,
+                                    },
+                                    className,
+                                )}
+                            />
 
-                <ArrowButton
-                    error={error}
-                    disabled={disabled}
-                    isOpen={isOpen}
-                    arrowButtonClassName={arrowButtonClassName}
-                />
+                            <ArrowButton
+                                error={error}
+                                disabled={disabled}
+                                isOpen={isOpen}
+                                arrowButtonClassName={arrowButtonClassName}
+                            />
 
-                <TextFieldLabel
-                    htmlFor={id}
-                    label={label}
-                    required={required}
-                    disabled={disabled}
-                    isFocused={isFocused}
-                    error={error}
-                    className={cx(
-                        styles.label,
-                        {
-                            [styles['label--focused']]: isFocused,
-                        },
-                        labelClassName,
-                    )}
-                />
+                            <TextFieldLabel
+                                htmlFor={id}
+                                label={label}
+                                required={required}
+                                disabled={disabled}
+                                isFocused={isFocused}
+                                error={error}
+                                className={cx(
+                                    styles.label,
+                                    {
+                                        [styles['label--focused']]: isFocused,
+                                    },
+                                    labelClassName,
+                                )}
+                            />
 
-                {!shouldHidePlaceholder && (
-                    <TextFieldPlaceholder
-                        htmlFor={id}
-                        placeholder={placeholder}
-                        required={required}
-                        disabled={disabled}
-                        isFieldFilled={isFieldFilled}
-                        error={error}
-                        className={cx(styles.placeholder, placeholderClassName)}
-                    />
-                )}
-            </TextFieldWrapper>
-        </InputContainer>
+                            {!shouldHidePlaceholder && (
+                                <TextFieldPlaceholder
+                                    htmlFor={id}
+                                    placeholder={placeholder}
+                                    required={required}
+                                    disabled={disabled}
+                                    isFieldFilled={isFieldFilled}
+                                    error={error}
+                                    className={cx(
+                                        styles.placeholder,
+                                        placeholderClassName,
+                                    )}
+                                />
+                            )}
+                        </TextFieldWrapper>
+
+                        {isOpen && <>Open</>}
+                    </div>
+                </FocusTrap>
+            </InputContainer>
+        </>
     );
 }

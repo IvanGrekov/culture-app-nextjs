@@ -21,6 +21,9 @@ const ArrowButton = (
     return (
         <IconButton
             ref={ref}
+            iconSize={20}
+            Icon={ArrowIcon}
+            tabIndex={-1}
             className={cx(
                 styles['arrow-button'],
                 {
@@ -30,8 +33,6 @@ const ArrowButton = (
                 },
                 arrowButtonClassName,
             )}
-            iconSize={20}
-            Icon={ArrowIcon}
         />
     );
 };

@@ -1,4 +1,4 @@
-import { FocusEventHandler, MouseEventHandler, RefObject } from 'react';
+import { FocusEventHandler, ChangeEventHandler, RefObject } from 'react';
 
 import { TTextFieldBaseProps } from 'types/textField.types';
 
@@ -14,7 +14,6 @@ export type TSelectBaseProps = TTextFieldBaseProps & {
     className?: string;
     onFocus?: FocusEventHandler<HTMLSelectElement>;
     onBlur?: FocusEventHandler<HTMLSelectElement>;
-    onClick?: MouseEventHandler<HTMLSelectElement>;
 };
 
 export type TSelectProps<T> = TSelectBaseProps & {
@@ -34,18 +33,18 @@ export type TSelectProps<T> = TSelectBaseProps & {
 export interface ISelectFieldHandlers<T> {
     onSelectFocus: TSelectProps<T>['onFocus'];
     onSelectBlur: TSelectProps<T>['onBlur'];
-    onSelectClick?: TSelectProps<T>['onClick'];
-    onSelectChange: TSelectProps<T>['onChange'];
+    onSelectChange?: ChangeEventHandler<HTMLSelectElement>;
+    onWrapperClick: VoidFunction;
+    onWrapperBlur: VoidFunction;
 }
 
 export interface ISelectFieldHandlersArgs<T> {
     onFocus?: TSelectProps<T>['onFocus'];
     onBlur?: TSelectProps<T>['onBlur'];
-    onClick?: TSelectProps<T>['onClick'];
     onChange?: TSelectProps<T>['onChange'];
 }
 
-export interface IUseSelectFieldResult<T> extends ISelectFieldHandlersArgs<T> {
+export interface IUseSelectFieldResult<T> extends ISelectFieldHandlers<T> {
     nativeSelectRef: RefObject<HTMLSelectElement>;
     customSelectRef: RefObject<HTMLInputElement>;
     id: string;

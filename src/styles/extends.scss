@@ -29,8 +29,9 @@
     &:-webkit-autofill:active,
     &:-webkit-autofill {
         position: relative;
-        transition: border-color $input-transition-duration
-            $input-transition-function !important;
+        transition-property: border-color, border-radius;
+        transition-duration: $input-transition-duration;
+        transition-timing-function: $input-transition-function;
     }
 
     &:hover,

@@ -59,6 +59,11 @@
 
     height: $input-height;
 
+    &--open {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
     &--filled {
         & ~ .placeholder {
             display: none;
@@ -79,10 +84,13 @@
 
 .arrow-button {
     position: absolute;
-    right: calc(#{$input-inline-spacing} * 1.5);
+    right: calc(#{$input-inline-spacing} * 0.7);
     top: 50%;
     translate: 0 -50%;
-    padding-right: 0;
+
+    &--open {
+        transform: rotate(180deg);
+    }
 
     &--error {
         svg {
