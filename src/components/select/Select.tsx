@@ -38,6 +38,7 @@ export default function Select<T>({
         isFieldFilled,
         onSelectFocus,
         onSelectBlur,
+        onSelectKeyDown,
         onSelectChange,
         onWrapperClick,
         onWrapperBlur,
@@ -78,6 +79,7 @@ export default function Select<T>({
                                 className={styles['native-select']}
                                 onFocus={onSelectFocus}
                                 onBlur={onSelectBlur}
+                                onKeyDown={onSelectKeyDown}
                                 onChange={onSelectChange}
                             />
 

@@ -1,4 +1,9 @@
-import { FocusEventHandler, ChangeEventHandler, RefObject } from 'react';
+import {
+    FocusEventHandler,
+    KeyboardEventHandler,
+    ChangeEventHandler,
+    RefObject,
+} from 'react';
 
 import { TTextFieldBaseProps } from 'types/textField.types';
 
@@ -33,6 +38,7 @@ export type TSelectProps<T> = TSelectBaseProps & {
 export interface ISelectFieldHandlers<T> {
     onSelectFocus: TSelectProps<T>['onFocus'];
     onSelectBlur: TSelectProps<T>['onBlur'];
+    onSelectKeyDown: KeyboardEventHandler<HTMLSelectElement>;
     onSelectChange?: ChangeEventHandler<HTMLSelectElement>;
     onWrapperClick: VoidFunction;
     onWrapperBlur: VoidFunction;

@@ -4,10 +4,12 @@ import {
     ISelectFieldHandlersArgs,
     IUseSelectFieldResult,
 } from 'components/select/types';
+import { getSelectFieldHandlers } from 'components/select/utils';
 
 export const useSelectField = <T>({
     onBlur,
     onFocus,
+    onChange,
 }: ISelectFieldHandlersArgs<T>): IUseSelectFieldResult<T> => {
     const nativeSelectRef = useRef<HTMLSelectElement>(null);
     const customSelectRef = useRef<HTMLInputElement>(null);
@@ -17,6 +19,15 @@ export const useSelectField = <T>({
     const [isFocused, setIsFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
+    const selectFieldHandlers = getSelectFieldHandlers<T>({
+        nativeSelectRef,
+        setIsFocused,
+        setIsOpen,
+        onBlur,
+        onFocus,
+        onChange,
+    });
+
     return {
         nativeSelectRef,
         customSelectRef,
@@ -24,20 +35,6 @@ export const useSelectField = <T>({
         isOpen,
         isFocused,
         isFieldFilled: false,
-        onSelectFocus: (e): void => {
-            onFocus?.(e);
-        },
-        onSelectBlur: (e): void => {
-            onBlur?.(e);
-        },
-        onWrapperClick: (): void => {
-            nativeSelectRef.current?.focus();
-            setIsOpen(true);
-            setIsFocused(true);
-        },
-        onWrapperBlur: (): void => {
-            setIsOpen(false);
-            setIsFocused(false);
-        },
+        ...selectFieldHandlers,
     };
 };
