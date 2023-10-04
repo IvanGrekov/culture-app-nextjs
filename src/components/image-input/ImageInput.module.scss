@@ -1,8 +1,6 @@
 @import 'styles/variables.scss';
 @import 'styles/extends.scss';
 
-$border-radius: 1rem;
-
 .input {
     @extend .hidden-native-input-extend;
 }
@@ -14,7 +12,7 @@ $border-radius: 1rem;
     width: $input-width;
     height: $input-width;
     justify-content: center;
-    border: dashed 1px var(--foreground);
+    border: dashed $border-width var(--foreground);
     border-radius: $border-radius;
 
     &--error {

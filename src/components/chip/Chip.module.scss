@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .chip {
     display: inline-flex;
     align-items: center;
@@ -7,7 +9,7 @@
     min-width: 6.25rem;
     min-height: 2.75rem;
     padding: 0.5rem 1rem;
-    border-radius: 2rem;
+    border-radius: calc(2 * #{$border-radius});
 
     &--contained {
         background-color: var(--foreground-invisible);

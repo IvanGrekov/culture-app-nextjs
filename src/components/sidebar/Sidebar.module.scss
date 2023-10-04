@@ -10,7 +10,7 @@
     height: 100vh;
     padding: $default-spacing-md;
     overflow-y: auto;
-    border-right: 1px dashed var(--foreground-invisible);
+    border-right: $border-width dashed var(--foreground-invisible);
 
     @media (max-width: $screen-md) {
         padding: $default-spacing-sm;

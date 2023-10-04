@@ -1,7 +1,7 @@
 @import 'styles/variables.scss';
 
 .card {
-    border-radius: $border-radius-lg;
+    border-radius: $border-radius-md;
     background-color: var(--background-opacity);
     box-shadow: var(--box-shadow-sm);
     padding: $spacing-4;

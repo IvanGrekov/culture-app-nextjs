@@ -91,7 +91,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid var(--foreground-invisible);
+    border-bottom: $border-width solid var(--foreground-invisible);
 
     &--compressed {
         @extend .header-compressed-size-extend;

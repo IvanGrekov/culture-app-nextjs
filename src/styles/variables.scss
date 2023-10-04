@@ -46,11 +46,13 @@ $default-spacing-sm: $spacing-3;
 $input-block-spacing: $spacing-2;
 $input-inline-spacing: 0.625rem;
 
-// Border Radius
+// Border
+$border-width: 1px;
 $border-radius-none: 0;
-$border-radius-sm: 2px;
-$border-radius-md: 4px;
-$border-radius-lg: 8px;
+$border-radius-xs: 2px;
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
 $border-radius-xl: 16px;
 $border-radius: $border-radius-xl;
 

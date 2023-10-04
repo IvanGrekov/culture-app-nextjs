@@ -1,4 +1,5 @@
 @import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .tooltip {
     position: relative;
@@ -13,23 +14,20 @@
     --vertical-distance: 105%;
     --horizontal-distance: 110%;
 
+    @include hidden-animated-element();
+
     position: absolute;
     width: max-content;
     max-width: 12.5rem;
     height: fit-content;
     padding: 0.2rem 0.4rem;
-    border-radius: 0.5rem;
+    border-radius: $border-radius-md;
     text-align: center;
     color: var(--background);
     background-color: var(--background-color);
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity $base-transition-duration, visibility 0s $base-transition-duration;
 
     &--open {
-        visibility: visible;
-        opacity: 1;
-        transition-delay: 0s;
+        @include visible-animated-element();
     }
 
     &::before {

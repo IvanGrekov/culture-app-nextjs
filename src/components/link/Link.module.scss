@@ -1,4 +1,5 @@
 @import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .link {
     position: relative;
@@ -7,6 +8,8 @@
     align-items: center;
 
     &::after {
+        @include hidden-animated-element();
+
         content: '';
         position: absolute;
         bottom: -0.3125rem;
@@ -14,8 +17,6 @@
         width: 105%;
         height: 0.125rem;
         background-color: var(--foreground);
-        visibility: hidden;
-        opacity: 0;
         transition: opacity $base-transition-duration,
             bottom $base-transition-duration,
             visibility 0s $base-transition-duration,
@@ -41,10 +42,9 @@
     &:hover,
     &:focus-visible {
         &::after {
+            @include visible-animated-element();
+
             bottom: -0.125rem;
-            opacity: 1;
-            visibility: visible;
-            transition-delay: 0s;
             background-color: var(--hover);
         }
     }
