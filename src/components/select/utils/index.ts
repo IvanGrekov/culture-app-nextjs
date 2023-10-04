@@ -20,7 +20,13 @@ export const getSelectFieldHandlers = <T>({
 }: TGetSelectFieldHandlersArgs<T>): ISelectFieldHandlers<T> => {
     const toggleSelect = (): void => {
         setIsFocused((prev) => !prev);
-        setIsOpen((prev) => !prev);
+        setIsOpen((prev) => {
+            if (!prev) {
+                nativeSelectRef.current?.focus();
+            }
+
+            return !prev;
+        });
     };
 
     const closeSelect = (): void => {
@@ -66,6 +72,10 @@ export const getSelectFieldHandlers = <T>({
         },
         onWrapperBlur: (): void => {
             closeSelect();
+        },
+        onArrowButtonClick: (e): void => {
+            e.stopPropagation();
+            toggleSelect();
         },
     };
 };

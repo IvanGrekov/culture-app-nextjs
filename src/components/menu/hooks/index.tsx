@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEventHandler } from 'react';
 
 import { getElementWithOnClick } from 'components/menu/utils';
 
@@ -6,7 +6,7 @@ type TUseMenu = (OpenMenuElement?: JSX.Element) => {
     isOpen: boolean;
     OpenMenuElementWithOnClick: JSX.Element | null;
     onDeactivate: VoidFunction;
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+    onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const useMenu: TUseMenu = (OpenMenuElement) => {
@@ -16,7 +16,7 @@ export const useMenu: TUseMenu = (OpenMenuElement) => {
         setIsOpen(false);
     };
 
-    const onClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
         setIsOpen((prevState) => !prevState);
     };

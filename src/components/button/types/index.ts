@@ -1,10 +1,10 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, MouseEventHandler } from 'react';
 
 import { IIconProps } from 'components/icons/types';
 import { TTypographyVariants } from 'components/typography/types';
 
 export interface IBaseButtonProps {
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
     title?: string;
     isActive?: boolean;
     isDisabled?: boolean;

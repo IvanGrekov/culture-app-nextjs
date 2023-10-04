@@ -2,6 +2,7 @@ import {
     FocusEventHandler,
     KeyboardEventHandler,
     ChangeEventHandler,
+    MouseEventHandler,
     RefObject,
 } from 'react';
 
@@ -42,6 +43,7 @@ export interface ISelectFieldHandlers<T> {
     onSelectChange?: ChangeEventHandler<HTMLSelectElement>;
     onWrapperClick: VoidFunction;
     onWrapperBlur: VoidFunction;
+    onArrowButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface ISelectFieldHandlersArgs<T> {

@@ -1,4 +1,4 @@
-import { forwardRef, Ref } from 'react';
+import { forwardRef, MouseEventHandler, Ref } from 'react';
 
 import cx from 'classnames';
 
@@ -12,10 +12,17 @@ type TArrowButtonProps = Pick<
     'error' | 'disabled' | 'arrowButtonClassName'
 > & {
     isOpen: boolean;
+    onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 const ArrowButton = (
-    { error, disabled, isOpen, arrowButtonClassName }: TArrowButtonProps,
+    {
+        error,
+        disabled,
+        isOpen,
+        arrowButtonClassName,
+        onClick,
+    }: TArrowButtonProps,
     ref: Ref<HTMLButtonElement>,
 ): JSX.Element => {
     return (
@@ -33,6 +40,7 @@ const ArrowButton = (
                 },
                 arrowButtonClassName,
             )}
+            onClick={onClick}
         />
     );
 };

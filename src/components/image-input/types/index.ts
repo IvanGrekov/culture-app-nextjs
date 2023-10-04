@@ -1,10 +1,10 @@
 import {
     InputHTMLAttributes,
-    ChangeEvent,
+    ChangeEventHandler,
     Dispatch,
     SetStateAction,
     RefObject,
-    DragEvent,
+    DragEventHandler,
 } from 'react';
 
 import { TTypographyVariants } from 'components/typography/types';
@@ -38,7 +38,7 @@ export type IImageInputPlaceholderProps = Pick<
     | 'placeholderClassName'
 >;
 
-export type TOnInputChange = (event: ChangeEvent<HTMLInputElement>) => void;
+export type TOnInputChange = ChangeEventHandler<HTMLInputElement>;
 
 export type TImagePreview = string | null;
 
@@ -56,7 +56,7 @@ export type TUseImagePreview = (args: {
     onChange?: TOnChange;
 }) => ITUseImagePreviewResult;
 
-export type TDragHandler = (event: DragEvent<HTMLLabelElement>) => void;
+export type TDragHandler = DragEventHandler<HTMLLabelElement>;
 
 interface IUseDropZoneResult {
     isDragActive: boolean;

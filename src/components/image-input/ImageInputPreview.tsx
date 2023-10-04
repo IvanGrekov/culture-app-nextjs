@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEventHandler } from 'react';
 
 import cx from 'classnames';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ export default function ImageInputPreview({
     disabled,
     clearImage,
 }: IImageInputPreviewProps): JSX.Element {
-    const onClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         clearImage();
     };

@@ -3,6 +3,7 @@ import FocusTrap from 'focus-trap-react';
 
 import InputContainer from 'components/input-container/InputContainer';
 import ArrowButton from 'components/select/ArrowButton';
+import Options from 'components/select/Options';
 import styles from 'components/select/Select.module.scss';
 import { useSelectField } from 'components/select/hooks';
 import { TSelectProps } from 'components/select/types';
@@ -12,12 +13,15 @@ import TextFieldWrapper from 'components/text-field-wrapper/TextFieldWrapper';
 
 export default function Select<T>({
     name,
+    value,
+    options,
     error,
     required,
     disabled,
     label,
     placeholder = label || 'Select option',
     shouldHidePlaceholder,
+    multiple,
     containerClassName,
     labelClassName,
     placeholderClassName,
@@ -28,6 +32,11 @@ export default function Select<T>({
     onChange,
     onFocus,
     onBlur,
+    getOptionLabel,
+    getOptionValue,
+    isOptionDisabled,
+    isOptionHidden,
+    isOptionSelected,
 }: TSelectProps<T>): JSX.Element {
     const {
         nativeSelectRef,
@@ -42,6 +51,7 @@ export default function Select<T>({
         onSelectChange,
         onWrapperClick,
         onWrapperBlur,
+        onArrowButtonClick,
     } = useSelectField<T>({
         onFocus,
         onBlur,
@@ -104,6 +114,7 @@ export default function Select<T>({
                                 disabled={disabled}
                                 isOpen={isOpen}
                                 arrowButtonClassName={arrowButtonClassName}
+                                onClick={onArrowButtonClick}
                             />
 
                             <TextFieldLabel
@@ -138,7 +149,17 @@ export default function Select<T>({
                             )}
                         </TextFieldWrapper>
 
-                        {isOpen && <>Open</>}
+                        <Options
+                            isOpen={isOpen}
+                            value={value}
+                            options={options}
+                            multiple={multiple}
+                            getOptionLabel={getOptionLabel}
+                            getOptionValue={getOptionValue}
+                            isOptionDisabled={isOptionDisabled}
+                            isOptionHidden={isOptionHidden}
+                            isOptionSelected={isOptionSelected}
+                        />
                     </div>
                 </FocusTrap>
             </InputContainer>

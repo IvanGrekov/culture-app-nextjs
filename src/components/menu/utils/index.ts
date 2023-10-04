@@ -1,8 +1,12 @@
-import { cloneElement, MouseEvent, FunctionComponentElement } from 'react';
+import {
+    cloneElement,
+    MouseEventHandler,
+    FunctionComponentElement,
+} from 'react';
 
 type TGetElementWithOnClick = (args: {
     Element: JSX.Element;
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+    onClick: MouseEventHandler<HTMLButtonElement>;
 }) => FunctionComponentElement<unknown>;
 
 export const getElementWithOnClick: TGetElementWithOnClick = ({
