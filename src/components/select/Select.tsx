@@ -1,11 +1,11 @@
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
 
+import { useSelectField } from '@/components/select/hooks/select.hooks';
 import InputContainer from 'components/input-container/InputContainer';
 import ArrowButton from 'components/select/ArrowButton';
 import Options from 'components/select/Options';
 import styles from 'components/select/Select.module.scss';
-import { useSelectField } from 'components/select/hooks';
 import { TSelectProps } from 'components/select/types';
 import TextFieldLabel from 'components/text-field-label/TextFieldLabel';
 import TextFieldPlaceholder from 'components/text-field-placeholder/TextFieldPlaceholder';
@@ -42,9 +42,11 @@ export default function Select<T>({
     const {
         nativeSelectRef,
         customSelectRef,
+        selectOptionsRef,
         id,
         isOpen,
         isFocused,
+        isOptionsFixed,
         isFieldFilled,
         onSelectFocus,
         onSelectBlur,
@@ -103,6 +105,8 @@ export default function Select<T>({
                                     {
                                         [styles['select--focused']]: isFocused,
                                         [styles['select--open']]: isOpen,
+                                        [styles['select--fixed-options']]:
+                                            isOptionsFixed,
                                         [styles['select--filled']]:
                                             isFieldFilled,
                                         [styles['select--disabled']]: disabled,
@@ -153,10 +157,12 @@ export default function Select<T>({
                         </TextFieldWrapper>
 
                         <Options
+                            optionsRef={selectOptionsRef}
                             isOpen={isOpen}
                             value={value}
                             options={options}
                             multiple={multiple}
+                            isOptionsFixed={isOptionsFixed}
                             getOptionLabel={getOptionLabel}
                             getOptionValue={getOptionValue}
                             isOptionDisabled={isOptionDisabled}

@@ -55,8 +55,10 @@ export interface ISelectFieldHandlersArgs<T> {
 export interface IUseSelectFieldResult<T> extends ISelectFieldHandlers<T> {
     nativeSelectRef: RefObject<HTMLSelectElement>;
     customSelectRef: RefObject<HTMLInputElement>;
+    selectOptionsRef: RefObject<HTMLDivElement>;
     id: string;
     isOpen: boolean;
     isFocused: boolean;
+    isOptionsFixed: boolean;
     isFieldFilled: boolean;
 }

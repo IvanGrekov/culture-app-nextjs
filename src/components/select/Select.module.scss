@@ -68,6 +68,11 @@
         border-bottom-right-radius: 0 !important;
     }
 
+    &--fixed-options {
+        border-bottom-left-radius: $border-radius-md !important;
+        border-bottom-right-radius: $border-radius-md !important;
+    }
+
     &--filled {
         & ~ .placeholder {
             display: none;
@@ -131,5 +136,10 @@
 
     &--open {
         @include visible-animated-element();
+    }
+
+    &--fixed {
+        border-top-left-radius: $border-radius-md !important;
+        border-top-right-radius: $border-radius-md !important;
     }
 }

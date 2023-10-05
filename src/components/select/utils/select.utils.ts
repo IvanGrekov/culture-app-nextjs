@@ -79,3 +79,15 @@ export const getSelectFieldHandlers = <T>({
         },
     };
 };
+
+export const getCustomSelectBottomPosition = (
+    customSelect: HTMLInputElement,
+): number => {
+    return customSelect.getBoundingClientRect().bottom;
+};
+
+export const getCustomSelectWidth = (
+    customSelect: HTMLInputElement,
+): number => {
+    return customSelect.clientWidth;
+};
