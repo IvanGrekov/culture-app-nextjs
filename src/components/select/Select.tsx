@@ -10,6 +10,7 @@ import { TSelectProps } from 'components/select/types';
 import TextFieldLabel from 'components/text-field-label/TextFieldLabel';
 import TextFieldPlaceholder from 'components/text-field-placeholder/TextFieldPlaceholder';
 import TextFieldWrapper from 'components/text-field-wrapper/TextFieldWrapper';
+import { useBodyScrollLock } from 'hooks/scroll.hooks';
 
 export default function Select<T>({
     name,
@@ -57,6 +58,8 @@ export default function Select<T>({
         onBlur,
         onChange,
     });
+
+    useBodyScrollLock(isOpen);
 
     return (
         <>

@@ -7,6 +7,7 @@ import MenuActions from 'components/menu/MenuActions';
 import { useMenu } from 'components/menu/hooks';
 import { IMenuProps } from 'components/menu/types';
 import Tooltip from 'components/tooltip/Tooltip';
+import { useBodyScrollLock } from 'hooks/scroll.hooks';
 
 export default function Menu({
     children,
@@ -18,6 +19,8 @@ export default function Menu({
 }: IMenuProps): JSX.Element {
     const { isOpen, onDeactivate, onClick, OpenMenuElementWithOnClick } =
         useMenu(OpenMenuElement);
+
+    useBodyScrollLock(isOpen);
 
     return (
         <FocusTrap

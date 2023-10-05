@@ -3,13 +3,31 @@ import { BODY_SCROLL_LOCK_CLASS_NAME } from 'constants/bodyScroll.constants';
 export const lockBodyScroll = (): void => {
     const body = document.querySelector('body');
 
-    body?.classList.add(BODY_SCROLL_LOCK_CLASS_NAME);
+    if (!body) {
+        return;
+    }
+
+    const scrollY = window.scrollY;
+    body.classList.add(BODY_SCROLL_LOCK_CLASS_NAME);
+    body.style.top = `-${scrollY}px`;
 };
 
 export const unlockBodyScroll = (): void => {
     const body = document.querySelector('body');
 
-    body?.classList.remove(BODY_SCROLL_LOCK_CLASS_NAME);
+    if (!body) {
+        return;
+    }
+
+    const scrollY = body.style.top;
+    body.classList.remove(BODY_SCROLL_LOCK_CLASS_NAME);
+    body.style.top = '';
+    window.scrollTo({
+        top: parseInt(scrollY || '0') * -1,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        behavior: 'instant',
+    });
 };
 
 export const getIsBodyScrollLocked = (): boolean => {
