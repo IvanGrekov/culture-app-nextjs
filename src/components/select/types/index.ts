@@ -22,18 +22,28 @@ export type TSelectBaseProps = TTextFieldBaseProps & {
     onBlur?: FocusEventHandler<HTMLSelectElement>;
 };
 
+export type TGetOptionLabel<T> = (option: T) => string;
+
+export type TGetOptionValue<T> = (option: T) => string;
+
+export type TGetIsOptionSelected<T> = (args: {
+    option: T;
+    value: T;
+}) => boolean;
+
+export type TGetIsOptionDisabled<T> = (option: T) => boolean;
+
+export type TGetIsOptionHidden<T> = (option: T) => boolean;
+
 export type TSelectProps<T> = TSelectBaseProps & {
-    // TODO: remove '?'
-    value?: T;
-    // TODO: remove '?'
-    options?: T[];
-    // TODO: remove '?'
+    value: T;
+    options: T[];
     onChange?: TOnSelectChange<T>;
-    getOptionLabel?: (option: T) => string;
-    getOptionValue?: (option: T) => string;
-    isOptionSelected?: (option: T) => boolean;
-    isOptionDisabled?: (option: T) => boolean;
-    isOptionHidden?: (option: T) => boolean;
+    getOptionLabel?: TGetOptionLabel<T>;
+    getOptionValue?: TGetOptionValue<T>;
+    getIsOptionSelected?: TGetIsOptionSelected<T>;
+    getIsOptionDisabled?: TGetIsOptionDisabled<T>;
+    getIsOptionHidden?: TGetIsOptionHidden<T>;
 };
 
 export interface ISelectFieldHandlers<T> {

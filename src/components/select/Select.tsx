@@ -35,9 +35,9 @@ export default function Select<T>({
     onBlur,
     getOptionLabel,
     getOptionValue,
-    isOptionDisabled,
-    isOptionHidden,
-    isOptionSelected,
+    getIsOptionDisabled,
+    getIsOptionHidden,
+    getIsOptionSelected,
 }: TSelectProps<T>): JSX.Element {
     const {
         nativeSelectRef,
@@ -165,9 +165,9 @@ export default function Select<T>({
                             isOptionsFixed={isOptionsFixed}
                             getOptionLabel={getOptionLabel}
                             getOptionValue={getOptionValue}
-                            isOptionDisabled={isOptionDisabled}
-                            isOptionHidden={isOptionHidden}
-                            isOptionSelected={isOptionSelected}
+                            getIsOptionDisabled={getIsOptionDisabled}
+                            getIsOptionHidden={getIsOptionHidden}
+                            getIsOptionSelected={getIsOptionSelected}
                         />
                     </div>
                 </FocusTrap>

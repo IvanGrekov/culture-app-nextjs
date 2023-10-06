@@ -126,6 +126,9 @@
     position: absolute;
     z-index: 1;
     top: calc(100% - #{$border-width});
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
     width: 100%;
     max-height: 11.25rem;
     padding: $spacing-1;
@@ -133,6 +136,8 @@
     border-top-right-radius: 0 !important;
     border-color: var(--hover) !important;
     background-color: var(--background);
+    overflow-y: auto;
+    cursor: default;
 
     &--open {
         @include visible-animated-element();
@@ -141,5 +146,28 @@
     &--fixed {
         border-top-left-radius: $border-radius-md !important;
         border-top-right-radius: $border-radius-md !important;
+    }
+}
+
+.option-item {
+    display: block;
+    padding: $spacing-1;
+    border: none;
+    border-radius: $border-radius-sm;
+    text-align: left;
+    transition: background-color calc(#{$base-transition-duration} / 2);
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+        background-color: var(--middle-opacity);
+    }
+
+    &--selected {
+        background-color: var(--middle-color);
+    }
+
+    &--disabled {
+        background-color: var(--disabled);
     }
 }

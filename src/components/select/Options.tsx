@@ -2,8 +2,10 @@ import { Ref } from 'react';
 
 import cx from 'classnames';
 
+import OptionItem from 'components/select/OptionItem';
 import styles from 'components/select/Select.module.scss';
 import { TSelectProps } from 'components/select/types';
+import { getDefaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 
 type TOptionsProps<T> = Pick<
     TSelectProps<T>,
@@ -12,9 +14,9 @@ type TOptionsProps<T> = Pick<
     | 'multiple'
     | 'getOptionLabel'
     | 'getOptionValue'
-    | 'isOptionDisabled'
-    | 'isOptionHidden'
-    | 'isOptionSelected'
+    | 'getIsOptionDisabled'
+    | 'getIsOptionHidden'
+    | 'getIsOptionSelected'
 > & {
     optionsRef: Ref<HTMLDivElement>;
     isOpen: boolean;
@@ -22,9 +24,12 @@ type TOptionsProps<T> = Pick<
 };
 
 export default function Options<T>({
+    options,
     optionsRef,
     isOpen,
     isOptionsFixed,
+    getOptionValue = getDefaultGetOptionLabel(),
+    ...props
 }: TOptionsProps<T>): JSX.Element {
     return (
         <div
@@ -34,11 +39,14 @@ export default function Options<T>({
                 [styles['options--fixed']]: isOptionsFixed,
             })}
         >
-            Component
-            <br />
-            Options
-            <br />
-            Component
+            {options.map((option) => (
+                <OptionItem
+                    key={getOptionValue(option)}
+                    option={option}
+                    getOptionValue={getOptionValue}
+                    {...props}
+                />
+            ))}
         </div>
     );
 }

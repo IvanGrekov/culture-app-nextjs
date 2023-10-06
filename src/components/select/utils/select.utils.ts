@@ -42,9 +42,14 @@ export const getSelectFieldHandlers = <T>({
             onBlur?.(e);
         },
         onSelectKeyDown: (e): void => {
+            const key = e.key;
+
+            if (key === 'Tab') {
+                return;
+            }
+
             e.preventDefault();
             e.stopPropagation();
-            const key = e.key;
 
             switch (key) {
                 case 'Escape':
@@ -58,10 +63,6 @@ export const getSelectFieldHandlers = <T>({
                 // NOTE: Space key
                 case ' ':
                     toggleSelect();
-                    break;
-
-                case 'Tab':
-                    closeSelect();
                     break;
             }
         },
