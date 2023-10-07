@@ -1,11 +1,12 @@
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
 
-import { useSelectField } from '@/components/select/hooks/select.hooks';
 import InputContainer from 'components/input-container/InputContainer';
 import ArrowButton from 'components/select/ArrowButton';
+import CustomSelect from 'components/select/CustomSelect';
 import Options from 'components/select/Options';
 import styles from 'components/select/Select.module.scss';
+import { useSelectField } from 'components/select/hooks/select.hooks';
 import { TSelectProps } from 'components/select/types';
 import TextFieldLabel from 'components/text-field-label/TextFieldLabel';
 import TextFieldPlaceholder from 'components/text-field-placeholder/TextFieldPlaceholder';
@@ -98,22 +99,15 @@ export default function Select<T>({
                                 onChange={onSelectChange}
                             />
 
-                            <div
-                                ref={customSelectRef}
-                                className={cx(
-                                    styles.select,
-                                    {
-                                        [styles['select--focused']]: isFocused,
-                                        [styles['select--open']]: isOpen,
-                                        [styles['select--fixed-options']]:
-                                            isOptionsFixed,
-                                        [styles['select--filled']]:
-                                            isFieldFilled,
-                                        [styles['select--disabled']]: disabled,
-                                        [styles['select--error']]: error,
-                                    },
-                                    className,
-                                )}
+                            <CustomSelect
+                                customSelectRef={customSelectRef}
+                                isOpen={isOpen}
+                                isFocused={isFocused}
+                                isFieldFilled={isFieldFilled}
+                                isOptionsFixed={isOptionsFixed}
+                                error={error}
+                                disabled={disabled}
+                                className={className}
                             />
 
                             <ArrowButton
@@ -157,7 +151,7 @@ export default function Select<T>({
                         </TextFieldWrapper>
 
                         <Options
-                            optionsRef={selectOptionsRef}
+                            selectOptionsRef={selectOptionsRef}
                             isOpen={isOpen}
                             value={value}
                             options={options}

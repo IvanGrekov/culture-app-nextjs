@@ -1,10 +1,8 @@
-import { Ref } from 'react';
-
 import cx from 'classnames';
 
 import OptionItem from 'components/select/OptionItem';
 import styles from 'components/select/Select.module.scss';
-import { TSelectProps } from 'components/select/types';
+import { TSelectProps, IUseSelectFieldResult } from 'components/select/types';
 import { getDefaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 
 type TOptionsProps<T> = Pick<
@@ -17,15 +15,15 @@ type TOptionsProps<T> = Pick<
     | 'getIsOptionDisabled'
     | 'getIsOptionHidden'
     | 'getIsOptionSelected'
-> & {
-    optionsRef: Ref<HTMLDivElement>;
-    isOpen: boolean;
-    isOptionsFixed: boolean;
-};
+> &
+    Pick<
+        IUseSelectFieldResult<T>,
+        'selectOptionsRef' | 'isOpen' | 'isOptionsFixed'
+    >;
 
 export default function Options<T>({
     options,
-    optionsRef,
+    selectOptionsRef,
     isOpen,
     isOptionsFixed,
     getOptionValue = getDefaultGetOptionLabel(),
@@ -33,7 +31,7 @@ export default function Options<T>({
 }: TOptionsProps<T>): JSX.Element {
     return (
         <div
-            ref={optionsRef}
+            ref={selectOptionsRef}
             className={cx(styles.options, {
                 [styles['options--open']]: isOpen,
                 [styles['options--fixed']]: isOptionsFixed,
