@@ -1,3 +1,4 @@
+import styles from 'components/select/Select.module.scss';
 import { TSelectProps } from 'components/select/types';
 import { getDefaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 import Typography from 'components/typography/Typography';
@@ -15,13 +16,15 @@ export default function SelectValuePreview<T>({
         return null;
     }
 
-    const valueLabels = isMultipleValue
-        ? value.map(getOptionLabel)
-        : getOptionLabel(value);
+    if (isMultipleValue) {
+        const valueLabels = value.map(getOptionLabel);
 
-    if (Array.isArray(valueLabels)) {
         return <Typography>{valueLabels.join(', ')}</Typography>;
     }
 
-    return <Typography>{valueLabels}</Typography>;
+    return (
+        <Typography className={styles['value-preview']}>
+            {getOptionLabel(value)}
+        </Typography>
+    );
 }

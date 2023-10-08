@@ -64,6 +64,7 @@
     align-items: center;
     height: $input-height;
     padding-left: $input-placeholder-left-spacing;
+    padding-right: $spacing-6;
 
     &--open {
         border-color: var(--hover) !important;
@@ -92,6 +93,16 @@
     &--error:active {
         @extend .input-error-state-extend;
     }
+
+    &__value-preview-wrapper {
+        flex-grow: 1;
+        overflow-x: auto;
+    }
+}
+
+.value-preview {
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .arrow-button {

@@ -44,7 +44,9 @@ export default function CustomSelect<T>({
                 className,
             )}
         >
-            <SelectValuePreview {...valuePreviewProps} />
+            <div className={styles['select__value-preview-wrapper']}>
+                <SelectValuePreview {...valuePreviewProps} />
+            </div>
         </div>
     );
 }

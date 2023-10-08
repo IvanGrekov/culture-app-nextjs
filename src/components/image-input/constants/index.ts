@@ -9,4 +9,4 @@ export const INPUT_ACCEPT_ATTRIBUTE = AVAILABLE_IMAGE_FORMATS.map(
 ).join(',');
 
 // NOTE: Should be synchronized with `styles/variables.scss` ($input-width)
-export const IMAGE_INPUT_SIZE = 260;
+export const IMAGE_INPUT_SIZE = 300;

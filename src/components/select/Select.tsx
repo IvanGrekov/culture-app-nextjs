@@ -86,7 +86,7 @@ export default function Select<T>({
                     }}
                 >
                     <div
-                        className={styles['select-wrapper']}
+                        className={cx(styles['select-wrapper'])}
                         onClick={onWrapperClick}
                     >
                         <TextFieldWrapper
