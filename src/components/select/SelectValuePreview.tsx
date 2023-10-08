@@ -44,6 +44,7 @@ export default function SelectValuePreview<T>({
                             title={label}
                             size="small"
                             titleVariant="body2"
+                            buttonTabIndex={-1}
                             className={styles['chip']}
                             onDelete={onDelete}
                         />

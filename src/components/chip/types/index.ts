@@ -7,6 +7,7 @@ export interface IChipProps {
     variant?: 'contained' | 'outlined';
     size?: 'small' | 'regular' | 'big';
     titleVariant?: TTypographyVariants;
+    buttonTabIndex?: number;
     className?: string;
     onDelete?: (e: MouseEvent<HTMLButtonElement>) => void;
 }

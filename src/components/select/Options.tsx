@@ -10,6 +10,7 @@ type TOptionsProps<T> = Pick<
     | 'value'
     | 'onChange'
     | 'options'
+    | 'error'
     | 'multiple'
     | 'getOptionLabel'
     | 'getOptionValue'
@@ -24,6 +25,7 @@ type TOptionsProps<T> = Pick<
 
 export default function Options<T>({
     options,
+    error,
     selectOptionsRef,
     isOpen,
     isOptionsFixed,
@@ -36,6 +38,7 @@ export default function Options<T>({
             className={cx(styles.options, {
                 [styles['options--open']]: isOpen,
                 [styles['options--fixed']]: isOptionsFixed,
+                [styles['options--error']]: error,
             })}
         >
             {options.map((option) => (

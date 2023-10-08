@@ -11,6 +11,7 @@ export default function Chip({
     variant = 'contained',
     size = 'regular',
     titleVariant,
+    buttonTabIndex = 0,
     className,
     onDelete,
 }: IChipProps): JSX.Element {
@@ -36,6 +37,7 @@ export default function Chip({
                     Icon={CloseIcon}
                     iconSize={15}
                     variant="overlayed"
+                    tabIndex={buttonTabIndex}
                     className={styles['delete-button']}
                     onClick={onDelete}
                 />

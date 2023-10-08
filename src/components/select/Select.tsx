@@ -88,7 +88,9 @@ export default function Select<T>({
                     }}
                 >
                     <div
-                        className={cx(styles['select-wrapper'])}
+                        className={cx(styles['select-wrapper'], {
+                            [styles['select-wrapper--error']]: error,
+                        })}
                         onClick={onWrapperClick}
                     >
                         <TextFieldWrapper
@@ -179,6 +181,7 @@ export default function Select<T>({
                             isOpen={isOpen}
                             value={value}
                             options={options}
+                            error={error}
                             multiple={multiple}
                             isOptionsFixed={isOptionsFixed}
                             onChange={onSelectChange}

@@ -12,7 +12,8 @@ $arrow-button-gutter: $spacing-6;
     &:hover,
     &:focus,
     &:focus-visible {
-        & ~ .select {
+        & ~ .select,
+        & ~ .options {
             border-color: var(--hover) !important;
         }
     }
@@ -56,9 +57,13 @@ $arrow-button-gutter: $spacing-6;
 .select-wrapper {
     position: relative;
 
-    &:hover {
-        .select {
-            border-color: var(--hover) !important;
+    &--error {
+        color: var(--red);
+
+        .arrow-button {
+            svg {
+                fill: var(--red);
+            }
         }
     }
 }
@@ -71,6 +76,10 @@ $arrow-button-gutter: $spacing-6;
     height: $input-height;
     padding-left: $input-placeholder-left-spacing;
     padding-right: $arrow-button-gutter;
+
+    &--error {
+        border-color: var(--red) !important;
+    }
 
     &--open {
         border-color: var(--hover) !important;
@@ -98,13 +107,6 @@ $arrow-button-gutter: $spacing-6;
 
     &--disabled {
         @extend .input-disabled-state-extend;
-    }
-
-    &--error,
-    &--error:hover,
-    &--error:focus,
-    &--error:active {
-        @extend .input-error-state-extend;
     }
 }
 
@@ -140,12 +142,6 @@ $arrow-button-gutter: $spacing-6;
     position: absolute;
     top: 50%;
     translate: 0 -50%;
-
-    &--error {
-        svg {
-            fill: var(--red);
-        }
-    }
 }
 
 .arrow-button {
@@ -164,6 +160,10 @@ $arrow-button-gutter: $spacing-6;
     }
 
     &:hover {
+        svg {
+            fill: var(--hover);
+        }
+
         ~ .clear-value-button {
             @include visible-animated-element();
         }
@@ -207,8 +207,14 @@ $arrow-button-gutter: $spacing-6;
     overflow-y: auto;
     cursor: default;
 
+    &--error {
+        border-color: var(--red) !important;
+    }
+
     &--open {
         @include visible-animated-element();
+
+        border-color: var(--hover) !important;
     }
 
     &--fixed {
