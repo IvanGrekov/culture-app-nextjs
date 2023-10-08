@@ -1,4 +1,5 @@
 @import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .accordion {
     --border: $border-width solid var(--foreground-invisible);
@@ -68,15 +69,15 @@
 }
 
 .content {
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all $base-transition-duration;
+    @include hidden-animated-element();
+
+    max-height: 31.25rem;
+    overflow-y: auto;
+    transition: opacity $base-transition-duration,
+        height $base-transition-duration,
+        visibility 0s $base-transition-duration;
 
     &--open {
-        height: 9.375rem;
-        max-height: 31.25rem;
-        opacity: 1;
-        overflow-y: auto;
+        @include visible-animated-element();
     }
 }

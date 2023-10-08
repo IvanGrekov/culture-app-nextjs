@@ -1,19 +1,25 @@
 import cx from 'classnames';
 
 import styles from 'components/accordion/Accordion.module.scss';
-import { IAccordionContentProps } from 'components/accordion/types';
+import { useContentHeight } from 'components/accordion/hooks';
+import { TAccordionContentProps } from 'components/accordion/types';
 
 export default function AccordionContent({
     isOpen,
     children,
-}: IAccordionContentProps): JSX.Element {
+}: TAccordionContentProps): JSX.Element {
+    const { childrenWrapperRef, contentHeight } = useContentHeight(isOpen);
+
     return (
         <div
             className={cx(styles.content, {
                 [styles['content--open']]: isOpen,
             })}
+            style={{
+                height: contentHeight,
+            }}
         >
-            {children}
+            <div ref={childrenWrapperRef}>{children}</div>
         </div>
     );
 }

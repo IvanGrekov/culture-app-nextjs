@@ -1,3 +1,5 @@
+import { PropsWithChildren } from 'react';
+
 import { TTypographyVariants } from 'components/typography/types';
 
 interface IAccordionItemProps {
@@ -10,14 +12,12 @@ export interface IAccordionHeaderProps extends IAccordionItemProps {
     onClick: VoidFunction;
 }
 
-export interface IAccordionContentProps extends IAccordionItemProps {
-    children: JSX.Element;
-}
+export type TAccordionContentProps = PropsWithChildren & IAccordionItemProps;
 
 export type TAccordionProps = Pick<
     IAccordionHeaderProps,
     'title' | 'titleVariant'
 > &
-    Pick<IAccordionContentProps, 'children'> & {
+    Pick<TAccordionContentProps, 'children'> & {
         isSpaced?: boolean;
     };

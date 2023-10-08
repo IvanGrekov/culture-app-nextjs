@@ -15,7 +15,7 @@ export default function Accordion({
 }: TAccordionProps): JSX.Element {
     const [isOpen, setIsOpen] = useState(false);
 
-    const onClick = (): void => {
+    const toggleAccordion = (): void => {
         setIsOpen((prev) => !prev);
     };
 
@@ -30,7 +30,7 @@ export default function Accordion({
                 isOpen={isOpen}
                 title={title}
                 titleVariant={titleVariant}
-                onClick={onClick}
+                onClick={toggleAccordion}
             />
 
             <AccordionContent isOpen={isOpen}>{children}</AccordionContent>
