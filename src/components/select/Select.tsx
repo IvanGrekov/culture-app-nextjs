@@ -111,15 +111,26 @@ export default function Select<T>({
 
                             <CustomSelect
                                 value={value}
+                                options={options}
                                 customSelectRef={customSelectRef}
                                 isOpen={isOpen}
                                 isFocused={isFocused}
                                 isFieldFilled={isFieldFilled}
                                 isOptionsFixed={isOptionsFixed}
+                                multiple={multiple}
                                 error={error}
                                 disabled={disabled}
                                 className={className}
                                 getOptionLabel={getOptionLabel}
+                                onChange={onSelectChange}
+                            />
+
+                            <ArrowButton
+                                error={error}
+                                disabled={disabled}
+                                isOpen={isOpen}
+                                arrowButtonClassName={arrowButtonClassName}
+                                onClick={onArrowButtonClick}
                             />
 
                             {isFieldFilled && !disabled && (
@@ -130,14 +141,6 @@ export default function Select<T>({
                                     }
                                 />
                             )}
-
-                            <ArrowButton
-                                error={error}
-                                disabled={disabled}
-                                isOpen={isOpen}
-                                arrowButtonClassName={arrowButtonClassName}
-                                onClick={onArrowButtonClick}
-                            />
 
                             <TextFieldLabel
                                 htmlFor={id}

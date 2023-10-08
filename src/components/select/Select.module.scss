@@ -89,6 +89,13 @@ $arrow-button-gutter: $spacing-6;
         }
     }
 
+    &--multiple {
+        padding-left: $input-inline-spacing;
+        padding-right: calc(#{$arrow-button-gutter} * 1.6);
+        min-height: $input-height;
+        height: auto;
+    }
+
     &--disabled {
         @extend .input-disabled-state-extend;
     }
@@ -99,10 +106,27 @@ $arrow-button-gutter: $spacing-6;
     &--error:active {
         @extend .input-error-state-extend;
     }
+}
 
-    &__value-preview-wrapper {
-        flex-grow: 1;
-        overflow-x: auto;
+.value-preview-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-1;
+    overflow-x: auto;
+
+    &--multiple {
+        flex-wrap: wrap;
+        overflow-x: hidden;
+    }
+
+    .chip {
+        justify-content: flex-start;
+
+        & * {
+            white-space: nowrap;
+            overflow: hidden;
+        }
     }
 }
 
@@ -124,20 +148,6 @@ $arrow-button-gutter: $spacing-6;
     }
 }
 
-.clear-value-button {
-    @include hidden-animated-element(
-        $input-transition-duration,
-        $input-transition-function
-    );
-
-    right: calc(#{$arrow-button-gutter} * 0.85);
-    background-color: var(--background);
-
-    &:hover {
-        @include visible-animated-element();
-    }
-}
-
 .arrow-button {
     right: calc(#{$input-inline-spacing} * 0.7);
 
@@ -151,6 +161,26 @@ $arrow-button-gutter: $spacing-6;
         svg {
             fill: var(--disabled);
         }
+    }
+
+    &:hover {
+        ~ .clear-value-button {
+            @include visible-animated-element();
+        }
+    }
+}
+
+.clear-value-button {
+    @include hidden-animated-element(
+        $input-transition-duration,
+        $input-transition-function
+    );
+
+    right: calc(#{$arrow-button-gutter} * 0.85);
+    background-color: var(--background);
+
+    &:hover {
+        @include visible-animated-element();
     }
 }
 

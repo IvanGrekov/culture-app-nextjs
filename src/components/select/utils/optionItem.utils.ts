@@ -1,7 +1,14 @@
+import { MouseEvent } from 'react';
+
 import CheckedSquareIcon from 'components/icons/CheckedSquareIcon';
 import OutlinedSquareIcon from 'components/icons/OutlinedSquareIcon';
 import { IIconProps } from 'components/icons/types';
-import { TGetOptionValue, TGetIsOptionSelected } from 'components/select/types';
+import {
+    TGetOptionValue,
+    TGetIsOptionSelected,
+    TSelectProps,
+    TGetOptionLabel,
+} from 'components/select/types';
 
 export const defaultGetOptionLabel = <T>(option: T): string => {
     return String(option);
@@ -35,3 +42,27 @@ export const getMultipleSelectOptionItemIcon: TGetMultipleSelectOptionItemIcon =
     (isChecked) => {
         return isChecked ? CheckedSquareIcon : OutlinedSquareIcon;
     };
+
+type IGetOnDeleteOptionArgs<T> = Pick<
+    TSelectProps<T>,
+    'options' | 'onChange'
+> & {
+    label: string;
+    getOptionLabel: TGetOptionLabel<T>;
+};
+
+type TGetOnDeleteOptionResult = (e: MouseEvent<HTMLButtonElement>) => void;
+
+export const getOnDeleteOptionByLabel = <T>({
+    label,
+    options,
+    getOptionLabel,
+    onChange,
+}: IGetOnDeleteOptionArgs<T>): TGetOnDeleteOptionResult => {
+    const option = options.find((option) => getOptionLabel(option) === label);
+
+    return (e) => {
+        e.stopPropagation();
+        option && onChange(option);
+    };
+};

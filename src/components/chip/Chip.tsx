@@ -9,12 +9,20 @@ import Typography from 'components/typography/Typography';
 export default function Chip({
     title,
     variant = 'contained',
-    titleVariant = 'body1',
+    size = 'regular',
+    titleVariant,
     className,
     onDelete,
 }: IChipProps): JSX.Element {
     return (
-        <div className={cx(styles.chip, styles[`chip--${variant}`], className)}>
+        <div
+            className={cx(
+                styles.chip,
+                styles[`chip--${variant}`],
+                styles[`chip--${size}`],
+                className,
+            )}
+        >
             <Typography
                 element="span"
                 variant={titleVariant}
@@ -28,7 +36,7 @@ export default function Chip({
                     Icon={CloseIcon}
                     iconSize={15}
                     variant="overlayed"
-                    className={styles.delete}
+                    className={styles['delete-button']}
                     onClick={onDelete}
                 />
             )}

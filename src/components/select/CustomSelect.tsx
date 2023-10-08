@@ -6,7 +6,14 @@ import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
 
 type TCustomSelectProps<T> = Pick<
     TSelectProps<T>,
-    'value' | 'error' | 'disabled' | 'className' | 'getOptionLabel'
+    | 'options'
+    | 'value'
+    | 'multiple'
+    | 'error'
+    | 'disabled'
+    | 'className'
+    | 'getOptionLabel'
+    | 'onChange'
 > &
     Pick<
         TUseSelectFieldResult<T>,
@@ -23,6 +30,7 @@ export default function CustomSelect<T>({
     isFocused,
     isOptionsFixed,
     isFieldFilled,
+    multiple,
     disabled,
     error,
     className,
@@ -38,13 +46,18 @@ export default function CustomSelect<T>({
                     [styles['select--open']]: isOpen,
                     [styles['select--fixed-options']]: isOptionsFixed,
                     [styles['select--filled']]: isFieldFilled,
+                    [styles['select--multiple']]: multiple,
                     [styles['select--disabled']]: disabled,
                     [styles['select--error']]: error,
                 },
                 className,
             )}
         >
-            <div className={styles['select__value-preview-wrapper']}>
+            <div
+                className={cx(styles['value-preview-wrapper'], {
+                    [styles['value-preview-wrapper--multiple']]: multiple,
+                })}
+            >
                 <SelectValuePreview {...valuePreviewProps} />
             </div>
         </div>

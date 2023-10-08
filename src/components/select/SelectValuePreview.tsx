@@ -1,13 +1,22 @@
+import Chip from 'components/chip/Chip';
 import styles from 'components/select/Select.module.scss';
 import { TSelectProps } from 'components/select/types';
-import { defaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
+import {
+    defaultGetOptionLabel,
+    getOnDeleteOptionByLabel,
+} from 'components/select/utils/optionItem.utils';
 import Typography from 'components/typography/Typography';
 
-type TSelectValuePreview<T> = Pick<TSelectProps<T>, 'value' | 'getOptionLabel'>;
+type TSelectValuePreview<T> = Pick<
+    TSelectProps<T>,
+    'options' | 'value' | 'getOptionLabel' | 'onChange'
+>;
 
 export default function SelectValuePreview<T>({
+    options,
     value,
     getOptionLabel = defaultGetOptionLabel,
+    onChange,
 }: TSelectValuePreview<T>): JSX.Element | null {
     const isMultipleValue = Array.isArray(value);
     const isEmptyValue = isMultipleValue ? value.length === 0 : !value;
@@ -19,7 +28,29 @@ export default function SelectValuePreview<T>({
     if (isMultipleValue) {
         const valueLabels = value.map(getOptionLabel);
 
-        return <Typography>{valueLabels.join(', ')}</Typography>;
+        return (
+            <>
+                {valueLabels.map((label) => {
+                    const onDelete = getOnDeleteOptionByLabel({
+                        label,
+                        options,
+                        getOptionLabel,
+                        onChange,
+                    });
+
+                    return (
+                        <Chip
+                            key={label}
+                            title={label}
+                            size="small"
+                            titleVariant="body2"
+                            className={styles['chip']}
+                            onDelete={onDelete}
+                        />
+                    );
+                })}
+            </>
+        );
     }
 
     return (

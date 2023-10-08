@@ -4,22 +4,35 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: $spacing-1;
     width: fit-content;
     min-width: 6.25rem;
     min-height: 2.75rem;
-    padding: 0.5rem 1rem;
-    border-radius: calc(2 * #{$border-radius});
+    padding: $spacing-1 $spacing-3;
+    border-radius: $border-radius-xl;
 
     &--contained {
         background-color: var(--foreground-invisible);
     }
 
     &--outlined {
-        border: solid 0.125rem var(--foreground-opacity);
+        border: solid $border-width var(--foreground-opacity);
+    }
+
+    &--small {
+        min-width: 5.625rem;
+        min-height: 2rem;
+        padding: $spacing-0-5 $spacing-1;
+    }
+
+    &--big {
+        min-width: 7.5rem;
+        min-height: 3.25rem;
+        padding: $spacing-2 $spacing-4;
     }
 }
 
-.delete {
-    padding: 0.25rem;
+.delete-button {
+    flex-shrink: 0;
+    padding: $spacing-0-5;
 }
