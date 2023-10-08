@@ -6,6 +6,7 @@ import {
     TLocalNativeSelectValue,
     TSelectFieldHandlersArgs,
     ISelectFieldHandlers,
+    TUseSelectFieldResult,
 } from 'components/select/types';
 
 type TGetLocalNativeSelectValueArgs<T> = {
@@ -118,4 +119,16 @@ export const getCustomSelectWidth = (
     customSelect: HTMLInputElement,
 ): number => {
     return customSelect.clientWidth;
+};
+
+export const getIsFieldFilled = <T>(
+    value: T,
+): TUseSelectFieldResult<T>['isFieldFilled'] => {
+    const isMultipleValue = Array.isArray(value);
+
+    if (isMultipleValue) {
+        return value.length > 0;
+    }
+
+    return !!value;
 };

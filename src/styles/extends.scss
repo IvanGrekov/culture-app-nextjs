@@ -146,7 +146,7 @@
     position: absolute;
     cursor: text;
     top: 50%;
-    left: 5%;
+    left: $input-placeholder-left-spacing;
     max-width: 90%;
     translate: 0 -55%;
 }

@@ -28,7 +28,7 @@ export type TImageInputProps = TBaseInputContainerProps &
         onChange?: TOnChange;
     };
 
-export type IImageInputPlaceholderProps = Pick<
+export type TImageInputPlaceholderProps = Pick<
     TImageInputProps,
     | 'disabled'
     | 'required'

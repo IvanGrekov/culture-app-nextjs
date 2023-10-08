@@ -11,7 +11,7 @@ import {
 } from 'components/select/utils/optionItem.utils';
 import Typography from 'components/typography/Typography';
 
-type IOptionItemProps<T> = Pick<
+type TOptionItemProps<T> = Pick<
     TSelectProps<T>,
     | 'value'
     | 'onChange'
@@ -34,7 +34,7 @@ export default function OptionItem<T>({
     getIsOptionDisabled,
     getOptionLabel = getDefaultGetOptionLabel(),
     getIsOptionSelected = getDefaultGetIsOptionSelected(getOptionLabel),
-}: IOptionItemProps<T>): JSX.Element | null {
+}: TOptionItemProps<T>): JSX.Element | null {
     const isHidden = getIsOptionHidden?.(option);
 
     if (isHidden) {

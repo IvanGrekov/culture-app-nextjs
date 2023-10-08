@@ -1,11 +1,12 @@
 import cx from 'classnames';
 
 import styles from 'components/select/Select.module.scss';
+import SelectValuePreview from 'components/select/SelectValuePreview';
 import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
 
-type ICustomSelectProps<T> = Pick<
+type TCustomSelectProps<T> = Pick<
     TSelectProps<T>,
-    'error' | 'disabled' | 'className'
+    'value' | 'error' | 'disabled' | 'className' | 'getOptionLabel'
 > &
     Pick<
         TUseSelectFieldResult<T>,
@@ -25,7 +26,8 @@ export default function CustomSelect<T>({
     disabled,
     error,
     className,
-}: ICustomSelectProps<T>): JSX.Element {
+    ...valuePreviewProps
+}: TCustomSelectProps<T>): JSX.Element {
     return (
         <div
             ref={customSelectRef}
@@ -41,6 +43,8 @@ export default function CustomSelect<T>({
                 },
                 className,
             )}
-        />
+        >
+            <SelectValuePreview {...valuePreviewProps} />
+        </div>
     );
 }

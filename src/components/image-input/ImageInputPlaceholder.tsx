@@ -3,7 +3,7 @@ import cx from 'classnames';
 import PictureIcon from 'components/icons/PictureIcon';
 import styles from 'components/image-input/ImageInput.module.scss';
 import { INPUT_DEFAULT_CAPTION } from 'components/image-input/constants';
-import { IImageInputPlaceholderProps } from 'components/image-input/types';
+import { TImageInputPlaceholderProps } from 'components/image-input/types';
 import InputLabelRequiredMark from 'components/input-label-required-mark/InputLabelRequiredMark';
 import Typography from 'components/typography/Typography';
 
@@ -14,7 +14,7 @@ export default function ImageInputPlaceholder({
     caption = INPUT_DEFAULT_CAPTION,
     placeholderVariant = 'body1',
     placeholderClassName,
-}: IImageInputPlaceholderProps): JSX.Element {
+}: TImageInputPlaceholderProps): JSX.Element {
     return (
         <div
             className={cx(styles['placeholder-wrapper'], {

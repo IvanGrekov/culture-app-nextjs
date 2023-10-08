@@ -10,6 +10,7 @@ import {
 } from 'components/select/types';
 import { getDefaultGetOptionValue } from 'components/select/utils/optionItem.utils';
 import {
+    getIsFieldFilled,
     getLocalNativeSelectValue,
     getSelectFieldHandlers,
 } from 'components/select/utils/select.utils';
@@ -58,15 +59,15 @@ export const useSelectField = <T>({
     const [isFocused, setIsFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
-    const nativeSelectLocalValueState = useLocalNativeSelectValue({
-        value,
-        getOptionValue,
-    });
-
     const { isOptionsFixed } = useFixedSelectOptions({
         isOpen,
         customSelectRef,
         selectOptionsRef,
+    });
+
+    const nativeSelectLocalValueState = useLocalNativeSelectValue({
+        value,
+        getOptionValue,
     });
 
     const selectFieldHandlers = getSelectFieldHandlers<T>({
@@ -79,15 +80,17 @@ export const useSelectField = <T>({
         onChange,
     });
 
+    const isFieldFilled = getIsFieldFilled(value);
+
     return {
         nativeSelectRef,
         customSelectRef,
         selectOptionsRef,
         id,
         isOpen,
-        isFocused,
         isOptionsFixed,
-        isFieldFilled: false,
+        isFocused: isFocused || isFieldFilled,
+        isFieldFilled,
         ...nativeSelectLocalValueState,
         ...selectFieldHandlers,
     };

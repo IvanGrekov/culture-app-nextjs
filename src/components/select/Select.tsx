@@ -108,6 +108,7 @@ export default function Select<T>({
                             />
 
                             <CustomSelect
+                                value={value}
                                 customSelectRef={customSelectRef}
                                 isOpen={isOpen}
                                 isFocused={isFocused}
@@ -116,6 +117,7 @@ export default function Select<T>({
                                 error={error}
                                 disabled={disabled}
                                 className={className}
+                                getOptionLabel={getOptionLabel}
                             />
 
                             <ArrowButton
