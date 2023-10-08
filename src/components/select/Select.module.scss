@@ -131,7 +131,7 @@
     flex-direction: column;
     gap: $spacing-1;
     width: 100%;
-    max-height: 11.25rem;
+    max-height: 12.5rem;
     padding: $spacing-1;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
@@ -151,24 +151,40 @@
 }
 
 .option-item {
-    display: block;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-1;
     padding: $spacing-1;
-    border: none;
+    border: $border-width solid transparent;
     border-radius: $border-radius-sm;
     text-align: left;
-    transition: background-color calc(#{$base-transition-duration} / 2);
     cursor: pointer;
+    overflow-x: hidden;
+    transition-property: background-color, border;
+    transition-duration: calc(#{$base-transition-duration} / 2);
 
     &:hover,
     &:focus-visible {
-        background-color: var(--middle-opacity);
+        background-color: var(--hover);
     }
 
     &--selected {
-        background-color: var(--middle-color);
+        background-color: var(--middle-opacity);
+
+        &:hover,
+        &:focus-visible {
+            border: $border-width solid var(--foreground);
+        }
     }
 
     &--disabled {
         background-color: var(--disabled);
+    }
+
+    &__multiple-icon {
+        flex-shrink: 0;
+        padding: 0;
+        pointer-events: none;
     }
 }

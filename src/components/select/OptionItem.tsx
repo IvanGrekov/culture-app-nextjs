@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 import cx from 'classnames';
 
 import styles from 'components/select/Select.module.scss';
@@ -5,12 +7,14 @@ import { TSelectProps } from 'components/select/types';
 import {
     getDefaultGetOptionLabel,
     getDefaultGetIsOptionSelected,
+    getMultipleSelectOptionItemIcon,
 } from 'components/select/utils/optionItem.utils';
 import Typography from 'components/typography/Typography';
 
 type IOptionItemProps<T> = Pick<
     TSelectProps<T>,
     | 'value'
+    | 'onChange'
     | 'multiple'
     | 'getOptionLabel'
     | 'getOptionValue'
@@ -24,6 +28,8 @@ type IOptionItemProps<T> = Pick<
 export default function OptionItem<T>({
     option,
     value,
+    multiple,
+    onChange,
     getIsOptionHidden,
     getIsOptionDisabled,
     getOptionLabel = getDefaultGetOptionLabel(),
@@ -40,6 +46,17 @@ export default function OptionItem<T>({
         option,
         value,
     });
+    const Icon = getMultipleSelectOptionItemIcon(isSelected);
+
+    const onClick = (e: MouseEvent<HTMLButtonElement>): void => {
+        e.stopPropagation();
+
+        if (isDisabled) {
+            return;
+        }
+
+        onChange(option);
+    };
 
     return (
         <button
@@ -48,7 +65,14 @@ export default function OptionItem<T>({
                 [styles['option-item--disabled']]: isDisabled,
                 [styles['option-item--selected']]: isSelected,
             })}
+            onClick={onClick}
         >
+            {multiple && (
+                <Icon
+                    size={25}
+                    wrapperClassName={cx(styles['option-item__multiple-icon'])}
+                />
+            )}
             <Typography>{getOptionLabel(option)}</Typography>
         </button>
     );

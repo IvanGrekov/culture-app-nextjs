@@ -1,11 +1,32 @@
 import { RefObject, Dispatch, SetStateAction } from 'react';
 
 import {
-    ISelectFieldHandlersArgs,
+    TSelectProps,
+    TGetOptionValue,
+    TLocalNativeSelectValue,
+    TSelectFieldHandlersArgs,
     ISelectFieldHandlers,
 } from 'components/select/types';
 
-type TGetSelectFieldHandlersArgs<T> = ISelectFieldHandlersArgs<T> & {
+type TGetLocalNativeSelectValueArgs<T> = {
+    value: TSelectProps<T>['value'];
+    getOptionValue: TGetOptionValue<T>;
+};
+
+export const getLocalNativeSelectValue = <T>({
+    value,
+    getOptionValue,
+}: TGetLocalNativeSelectValueArgs<T>): TLocalNativeSelectValue => {
+    const isArray = Array.isArray(value);
+
+    if (isArray) {
+        return value.map(getOptionValue);
+    }
+
+    return getOptionValue(value);
+};
+
+type TGetSelectFieldHandlersArgs<T> = TSelectFieldHandlersArgs<T> & {
     nativeSelectRef: RefObject<HTMLSelectElement>;
     setIsFocused: Dispatch<SetStateAction<boolean>>;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -13,10 +34,12 @@ type TGetSelectFieldHandlersArgs<T> = ISelectFieldHandlersArgs<T> & {
 
 export const getSelectFieldHandlers = <T>({
     nativeSelectRef,
+    shouldCloseOnChange,
     setIsFocused,
     setIsOpen,
     onFocus,
     onBlur,
+    onChange,
 }: TGetSelectFieldHandlersArgs<T>): ISelectFieldHandlers<T> => {
     const toggleSelect = (): void => {
         setIsFocused((prev) => !prev);
@@ -35,13 +58,13 @@ export const getSelectFieldHandlers = <T>({
     };
 
     return {
-        onSelectFocus: (e): void => {
+        onNativeSelectFocus: (e): void => {
             onFocus?.(e);
         },
-        onSelectBlur: (e): void => {
+        onNativeSelectBlur: (e): void => {
             onBlur?.(e);
         },
-        onSelectKeyDown: (e): void => {
+        onNativeSelectKeyDown: (e): void => {
             const key = e.key;
 
             if (key === 'Tab') {
@@ -77,6 +100,10 @@ export const getSelectFieldHandlers = <T>({
         onArrowButtonClick: (e): void => {
             e.stopPropagation();
             toggleSelect();
+        },
+        onSelectChange: (value): void => {
+            onChange(value);
+            shouldCloseOnChange && closeSelect();
         },
     };
 };

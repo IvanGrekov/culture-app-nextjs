@@ -1,14 +1,14 @@
 import cx from 'classnames';
 
 import styles from 'components/select/Select.module.scss';
-import { TSelectProps, IUseSelectFieldResult } from 'components/select/types';
+import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
 
 type ICustomSelectProps<T> = Pick<
     TSelectProps<T>,
     'error' | 'disabled' | 'className'
 > &
     Pick<
-        IUseSelectFieldResult<T>,
+        TUseSelectFieldResult<T>,
         | 'customSelectRef'
         | 'isOpen'
         | 'isFocused'

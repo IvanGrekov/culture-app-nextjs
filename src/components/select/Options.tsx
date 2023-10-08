@@ -2,12 +2,13 @@ import cx from 'classnames';
 
 import OptionItem from 'components/select/OptionItem';
 import styles from 'components/select/Select.module.scss';
-import { TSelectProps, IUseSelectFieldResult } from 'components/select/types';
+import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
 import { getDefaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 
 type TOptionsProps<T> = Pick<
     TSelectProps<T>,
     | 'value'
+    | 'onChange'
     | 'options'
     | 'multiple'
     | 'getOptionLabel'
@@ -17,7 +18,7 @@ type TOptionsProps<T> = Pick<
     | 'getIsOptionSelected'
 > &
     Pick<
-        IUseSelectFieldResult<T>,
+        TUseSelectFieldResult<T>,
         'selectOptionsRef' | 'isOpen' | 'isOptionsFixed'
     >;
 

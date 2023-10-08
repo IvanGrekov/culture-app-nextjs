@@ -1,17 +1,54 @@
-import { useRef, useId, useState } from 'react';
+import { useRef, useId, useState, useEffect } from 'react';
 
 import { useFixedSelectOptions } from 'components/select/hooks/options.hooks';
 import {
-    ISelectFieldHandlersArgs,
-    IUseSelectFieldResult,
+    TUseLocalNativeSelectValueArgs,
+    TUseLocalNativeSelectValueResult,
+    TLocalNativeSelectValue,
+    TUseSelectFieldArgs,
+    TUseSelectFieldResult,
 } from 'components/select/types';
-import { getSelectFieldHandlers } from 'components/select/utils/select.utils';
+import { getDefaultGetOptionValue } from 'components/select/utils/optionItem.utils';
+import {
+    getLocalNativeSelectValue,
+    getSelectFieldHandlers,
+} from 'components/select/utils/select.utils';
+
+const useLocalNativeSelectValue = <T>({
+    value,
+    getOptionValue = getDefaultGetOptionValue(),
+}: TUseLocalNativeSelectValueArgs<T>): TUseLocalNativeSelectValueResult => {
+    const [localValue, setLocalValue] = useState<TLocalNativeSelectValue>(() =>
+        getLocalNativeSelectValue({
+            value,
+            getOptionValue,
+        }),
+    );
+
+    useEffect(() => {
+        const newLocalValue = getLocalNativeSelectValue({
+            value,
+            getOptionValue,
+        });
+        setLocalValue(newLocalValue);
+    }, [value, getOptionValue]);
+
+    return {
+        localNativeSelectValue: localValue,
+        onNativeSelectChange: (): void => {
+            // Placeholder
+        },
+    };
+};
 
 export const useSelectField = <T>({
+    value,
+    shouldCloseOnChange,
+    getOptionValue,
     onBlur,
     onFocus,
     onChange,
-}: ISelectFieldHandlersArgs<T>): IUseSelectFieldResult<T> => {
+}: TUseSelectFieldArgs<T>): TUseSelectFieldResult<T> => {
     const nativeSelectRef = useRef<HTMLSelectElement>(null);
     const customSelectRef = useRef<HTMLInputElement>(null);
     const selectOptionsRef = useRef<HTMLDivElement>(null);
@@ -21,6 +58,11 @@ export const useSelectField = <T>({
     const [isFocused, setIsFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
+    const nativeSelectLocalValueState = useLocalNativeSelectValue({
+        value,
+        getOptionValue,
+    });
+
     const { isOptionsFixed } = useFixedSelectOptions({
         isOpen,
         customSelectRef,
@@ -29,6 +71,7 @@ export const useSelectField = <T>({
 
     const selectFieldHandlers = getSelectFieldHandlers<T>({
         nativeSelectRef,
+        shouldCloseOnChange,
         setIsFocused,
         setIsOpen,
         onBlur,
@@ -45,6 +88,7 @@ export const useSelectField = <T>({
         isFocused,
         isOptionsFixed,
         isFieldFilled: false,
+        ...nativeSelectLocalValueState,
         ...selectFieldHandlers,
     };
 };

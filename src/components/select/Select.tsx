@@ -24,6 +24,7 @@ export default function Select<T>({
     placeholder = label || 'Select option',
     shouldHidePlaceholder,
     multiple,
+    shouldCloseOnChange = multiple ? false : true,
     containerClassName,
     labelClassName,
     placeholderClassName,
@@ -31,9 +32,9 @@ export default function Select<T>({
     textFieldWrapperClassName,
     arrowButtonClassName,
     className,
-    onChange,
     onFocus,
     onBlur,
+    onChange,
     getOptionLabel,
     getOptionValue,
     getIsOptionDisabled,
@@ -44,19 +45,24 @@ export default function Select<T>({
         nativeSelectRef,
         customSelectRef,
         selectOptionsRef,
+        localNativeSelectValue,
         id,
         isOpen,
         isFocused,
         isOptionsFixed,
         isFieldFilled,
-        onSelectFocus,
-        onSelectBlur,
-        onSelectKeyDown,
-        onSelectChange,
+        onNativeSelectFocus,
+        onNativeSelectBlur,
+        onNativeSelectKeyDown,
+        onNativeSelectChange,
         onWrapperClick,
         onWrapperBlur,
         onArrowButtonClick,
+        onSelectChange,
     } = useSelectField<T>({
+        value,
+        shouldCloseOnChange,
+        getOptionValue,
         onFocus,
         onBlur,
         onChange,
@@ -90,13 +96,15 @@ export default function Select<T>({
                             <select
                                 ref={nativeSelectRef}
                                 id={id}
+                                value={localNativeSelectValue}
                                 name={name}
+                                multiple={multiple}
                                 disabled={disabled}
                                 className={styles['native-select']}
-                                onFocus={onSelectFocus}
-                                onBlur={onSelectBlur}
-                                onKeyDown={onSelectKeyDown}
-                                onChange={onSelectChange}
+                                onFocus={onNativeSelectFocus}
+                                onBlur={onNativeSelectBlur}
+                                onKeyDown={onNativeSelectKeyDown}
+                                onChange={onNativeSelectChange}
                             />
 
                             <CustomSelect
@@ -157,6 +165,7 @@ export default function Select<T>({
                             options={options}
                             multiple={multiple}
                             isOptionsFixed={isOptionsFixed}
+                            onChange={onSelectChange}
                             getOptionLabel={getOptionLabel}
                             getOptionValue={getOptionValue}
                             getIsOptionDisabled={getIsOptionDisabled}

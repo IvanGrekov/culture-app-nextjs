@@ -8,8 +8,6 @@ import {
 
 import { TTextFieldBaseProps } from 'types/textField.types';
 
-export type TOnSelectChange<T> = (value: T) => void;
-
 export type TSelectBaseProps = TTextFieldBaseProps & {
     name?: string;
     multiple?: boolean;
@@ -22,13 +20,17 @@ export type TSelectBaseProps = TTextFieldBaseProps & {
     onBlur?: FocusEventHandler<HTMLSelectElement>;
 };
 
+export type TSelectValue<T> = T | T[];
+
+export type TOnSelectChange<T> = (value: T) => void;
+
 export type TGetOptionLabel<T> = (option: T) => string;
 
 export type TGetOptionValue<T> = (option: T) => string;
 
 export type TGetIsOptionSelected<T> = (args: {
     option: T;
-    value: T;
+    value: TSelectValue<T>;
 }) => boolean;
 
 export type TGetIsOptionDisabled<T> = (option: T) => boolean;
@@ -36,9 +38,10 @@ export type TGetIsOptionDisabled<T> = (option: T) => boolean;
 export type TGetIsOptionHidden<T> = (option: T) => boolean;
 
 export type TSelectProps<T> = TSelectBaseProps & {
-    value: T;
+    value: TSelectValue<T>;
     options: T[];
-    onChange?: TOnSelectChange<T>;
+    shouldCloseOnChange?: boolean;
+    onChange: TOnSelectChange<T>;
     getOptionLabel?: TGetOptionLabel<T>;
     getOptionValue?: TGetOptionValue<T>;
     getIsOptionSelected?: TGetIsOptionSelected<T>;
@@ -47,28 +50,43 @@ export type TSelectProps<T> = TSelectBaseProps & {
 };
 
 export interface ISelectFieldHandlers<T> {
-    onSelectFocus: TSelectProps<T>['onFocus'];
-    onSelectBlur: TSelectProps<T>['onBlur'];
-    onSelectKeyDown: KeyboardEventHandler<HTMLSelectElement>;
-    onSelectChange?: ChangeEventHandler<HTMLSelectElement>;
+    onNativeSelectFocus: TSelectProps<T>['onFocus'];
+    onNativeSelectBlur: TSelectProps<T>['onBlur'];
+    onNativeSelectKeyDown: KeyboardEventHandler<HTMLSelectElement>;
     onWrapperClick: VoidFunction;
     onWrapperBlur: VoidFunction;
     onArrowButtonClick: MouseEventHandler<HTMLButtonElement>;
+    onSelectChange: TOnSelectChange<T>;
 }
 
-export interface ISelectFieldHandlersArgs<T> {
-    onFocus?: TSelectProps<T>['onFocus'];
-    onBlur?: TSelectProps<T>['onBlur'];
-    onChange?: TSelectProps<T>['onChange'];
-}
+export type TSelectFieldHandlersArgs<T> = Pick<
+    TSelectProps<T>,
+    'onFocus' | 'onBlur' | 'onChange' | 'shouldCloseOnChange'
+>;
 
-export interface IUseSelectFieldResult<T> extends ISelectFieldHandlers<T> {
-    nativeSelectRef: RefObject<HTMLSelectElement>;
-    customSelectRef: RefObject<HTMLInputElement>;
-    selectOptionsRef: RefObject<HTMLDivElement>;
-    id: string;
-    isOpen: boolean;
-    isFocused: boolean;
-    isOptionsFixed: boolean;
-    isFieldFilled: boolean;
-}
+export type TUseLocalNativeSelectValueArgs<T> = Pick<
+    TSelectProps<T>,
+    'value' | 'getOptionValue'
+>;
+
+export type TLocalNativeSelectValue = string | string[] | undefined;
+
+export type TUseLocalNativeSelectValueResult = {
+    localNativeSelectValue: TLocalNativeSelectValue;
+    onNativeSelectChange: ChangeEventHandler<HTMLSelectElement>;
+};
+
+export type TUseSelectFieldArgs<T> = TSelectFieldHandlersArgs<T> &
+    TUseLocalNativeSelectValueArgs<T>;
+
+export type TUseSelectFieldResult<T> = ISelectFieldHandlers<T> &
+    TUseLocalNativeSelectValueResult & {
+        nativeSelectRef: RefObject<HTMLSelectElement>;
+        customSelectRef: RefObject<HTMLInputElement>;
+        selectOptionsRef: RefObject<HTMLDivElement>;
+        id: string;
+        isOpen: boolean;
+        isFocused: boolean;
+        isOptionsFixed: boolean;
+        isFieldFilled: boolean;
+    };
