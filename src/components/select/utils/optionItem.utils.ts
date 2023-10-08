@@ -1,22 +1,14 @@
 import CheckedSquareIcon from 'components/icons/CheckedSquareIcon';
 import OutlinedSquareIcon from 'components/icons/OutlinedSquareIcon';
 import { IIconProps } from 'components/icons/types';
-import {
-    TGetOptionLabel,
-    TGetOptionValue,
-    TGetIsOptionSelected,
-} from 'components/select/types';
+import { TGetOptionValue, TGetIsOptionSelected } from 'components/select/types';
 
-export const getDefaultGetOptionLabel = <T>(): TGetOptionLabel<T> => {
-    return (option: T): string => {
-        return String(option);
-    };
+export const defaultGetOptionLabel = <T>(option: T): string => {
+    return String(option);
 };
 
-export const getDefaultGetOptionValue = <T>(): TGetOptionValue<T> => {
-    return (option: T): string => {
-        return String(option);
-    };
+export const defaultGetOptionValue = <T>(option: T): string => {
+    return String(option);
 };
 
 export const getDefaultGetIsOptionSelected = <T>(

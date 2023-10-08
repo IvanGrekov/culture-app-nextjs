@@ -8,7 +8,7 @@ import {
     TUseSelectFieldArgs,
     TUseSelectFieldResult,
 } from 'components/select/types';
-import { getDefaultGetOptionValue } from 'components/select/utils/optionItem.utils';
+import { defaultGetOptionValue } from 'components/select/utils/optionItem.utils';
 import {
     getIsFieldFilled,
     getLocalNativeSelectValue,
@@ -17,14 +17,9 @@ import {
 
 const useLocalNativeSelectValue = <T>({
     value,
-    getOptionValue = getDefaultGetOptionValue(),
+    getOptionValue = defaultGetOptionValue,
 }: TUseLocalNativeSelectValueArgs<T>): TUseLocalNativeSelectValueResult => {
-    const [localValue, setLocalValue] = useState<TLocalNativeSelectValue>(() =>
-        getLocalNativeSelectValue({
-            value,
-            getOptionValue,
-        }),
-    );
+    const [localValue, setLocalValue] = useState<TLocalNativeSelectValue>();
 
     useEffect(() => {
         const newLocalValue = getLocalNativeSelectValue({

@@ -5,7 +5,7 @@ import cx from 'classnames';
 import styles from 'components/select/Select.module.scss';
 import { TSelectProps } from 'components/select/types';
 import {
-    getDefaultGetOptionLabel,
+    defaultGetOptionLabel,
     getDefaultGetIsOptionSelected,
     getMultipleSelectOptionItemIcon,
 } from 'components/select/utils/optionItem.utils';
@@ -32,7 +32,7 @@ export default function OptionItem<T>({
     onChange,
     getIsOptionHidden,
     getIsOptionDisabled,
-    getOptionLabel = getDefaultGetOptionLabel(),
+    getOptionLabel = defaultGetOptionLabel,
     getIsOptionSelected = getDefaultGetIsOptionSelected(getOptionLabel),
 }: TOptionItemProps<T>): JSX.Element | null {
     const isHidden = getIsOptionHidden?.(option);

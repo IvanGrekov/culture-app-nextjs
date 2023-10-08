@@ -3,7 +3,7 @@ import cx from 'classnames';
 import OptionItem from 'components/select/OptionItem';
 import styles from 'components/select/Select.module.scss';
 import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
-import { getDefaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
+import { defaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 
 type TOptionsProps<T> = Pick<
     TSelectProps<T>,
@@ -27,7 +27,7 @@ export default function Options<T>({
     selectOptionsRef,
     isOpen,
     isOptionsFixed,
-    getOptionValue = getDefaultGetOptionLabel(),
+    getOptionValue = defaultGetOptionLabel,
     ...props
 }: TOptionsProps<T>): JSX.Element {
     return (

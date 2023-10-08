@@ -1,13 +1,13 @@
 import styles from 'components/select/Select.module.scss';
 import { TSelectProps } from 'components/select/types';
-import { getDefaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
+import { defaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 import Typography from 'components/typography/Typography';
 
 type TSelectValuePreview<T> = Pick<TSelectProps<T>, 'value' | 'getOptionLabel'>;
 
 export default function SelectValuePreview<T>({
     value,
-    getOptionLabel = getDefaultGetOptionLabel(),
+    getOptionLabel = defaultGetOptionLabel,
 }: TSelectValuePreview<T>): JSX.Element | null {
     const isMultipleValue = Array.isArray(value);
     const isEmptyValue = isMultipleValue ? value.length === 0 : !value;
