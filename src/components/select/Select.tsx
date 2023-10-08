@@ -3,6 +3,7 @@ import FocusTrap from 'focus-trap-react';
 
 import InputContainer from 'components/input-container/InputContainer';
 import ArrowButton from 'components/select/ArrowButton';
+import ClearValueButton from 'components/select/ClearValueButton';
 import CustomSelect from 'components/select/CustomSelect';
 import Options from 'components/select/Options';
 import styles from 'components/select/Select.module.scss';
@@ -31,6 +32,7 @@ export default function Select<T>({
     errorClassName,
     textFieldWrapperClassName,
     arrowButtonClassName,
+    clearValueButtonClassName,
     className,
     onFocus,
     onBlur,
@@ -119,6 +121,15 @@ export default function Select<T>({
                                 className={className}
                                 getOptionLabel={getOptionLabel}
                             />
+
+                            {isFieldFilled && !disabled && (
+                                <ClearValueButton
+                                    onChange={onChange}
+                                    clearValueButtonClassName={
+                                        clearValueButtonClassName
+                                    }
+                                />
+                            )}
 
                             <ArrowButton
                                 error={error}

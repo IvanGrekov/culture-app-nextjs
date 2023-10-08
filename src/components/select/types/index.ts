@@ -15,6 +15,7 @@ export type TSelectBaseProps = TTextFieldBaseProps & {
     disabled?: boolean;
     placeholder?: string;
     arrowButtonClassName?: string;
+    clearValueButtonClassName?: string;
     className?: string;
     onFocus?: FocusEventHandler<HTMLSelectElement>;
     onBlur?: FocusEventHandler<HTMLSelectElement>;
@@ -22,7 +23,7 @@ export type TSelectBaseProps = TTextFieldBaseProps & {
 
 export type TSelectValue<T> = T | T[];
 
-export type TOnSelectChange<T> = (value: T) => void;
+export type TOnSelectChange<T> = (value: T | null) => void;
 
 export type TGetOptionLabel<T> = (option: T) => string;
 

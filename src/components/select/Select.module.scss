@@ -2,6 +2,8 @@
 @import 'styles/extends.scss';
 @import 'styles/mixins.scss';
 
+$arrow-button-gutter: $spacing-6;
+
 .native-select {
     @extend .hidden-native-input-extend;
 
@@ -27,6 +29,10 @@
                 transition: fill $input-transition-duration
                     $input-transition-function;
             }
+        }
+
+        ~ .clear-value-button {
+            @include visible-animated-element();
         }
     }
 }
@@ -64,7 +70,7 @@
     align-items: center;
     height: $input-height;
     padding-left: $input-placeholder-left-spacing;
-    padding-right: $spacing-6;
+    padding-right: $arrow-button-gutter;
 
     &--open {
         border-color: var(--hover) !important;
@@ -105,20 +111,38 @@
     white-space: nowrap;
 }
 
+.clear-value-button,
 .arrow-button {
     position: absolute;
-    right: calc(#{$input-inline-spacing} * 0.7);
     top: 50%;
     translate: 0 -50%;
-
-    &--open {
-        transform: rotate(180deg);
-    }
 
     &--error {
         svg {
             fill: var(--red);
         }
+    }
+}
+
+.clear-value-button {
+    @include hidden-animated-element(
+        $input-transition-duration,
+        $input-transition-function
+    );
+
+    right: calc(#{$arrow-button-gutter} * 0.85);
+    background-color: var(--background);
+
+    &:hover {
+        @include visible-animated-element();
+    }
+}
+
+.arrow-button {
+    right: calc(#{$input-inline-spacing} * 0.7);
+
+    &--open {
+        transform: rotate(180deg);
     }
 
     &--disabled {
