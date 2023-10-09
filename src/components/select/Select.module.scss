@@ -139,14 +139,10 @@ $arrow-button-gutter: $spacing-6;
 
 .clear-value-button,
 .arrow-button {
-    position: absolute;
-    top: 50%;
-    translate: 0 -50%;
+    @extend .input-button-icon-abs-position-extend;
 }
 
 .arrow-button {
-    right: calc(#{$input-inline-spacing} * 0.7);
-
     &--open {
         transform: rotate(180deg);
     }
@@ -221,6 +217,17 @@ $arrow-button-gutter: $spacing-6;
         border-top-left-radius: $border-radius-md !important;
         border-top-right-radius: $border-radius-md !important;
     }
+}
+
+.search-field__container,
+.search-field__text-field-wrapper,
+.search-field {
+    width: 100% !important;
+}
+
+.search-field {
+    height: calc(#{$input-height} * 0.75) !important;
+    padding: $spacing-1 !important;
 }
 
 .option-item {

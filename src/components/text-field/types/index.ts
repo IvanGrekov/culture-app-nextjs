@@ -8,6 +8,8 @@ import {
     SetStateAction,
 } from 'react';
 
+import { IIconProps } from 'components/icons/types';
+import { TTextFieldPlaceholderProps } from 'components/text-field-placeholder/TextFieldPlaceholder';
 import { TTextFieldBaseProps } from 'types/textField.types';
 
 export type TTextFieldProps = InputHTMLAttributes<HTMLInputElement> &
@@ -21,6 +23,9 @@ export type TTextFieldProps = InputHTMLAttributes<HTMLInputElement> &
             | 'url'
             | 'search'
             | 'date';
+        placeholderVariant?: TTextFieldPlaceholderProps['variant'];
+        Icon?: (props: IIconProps) => JSX.Element;
+        iconSize?: IIconProps['size'];
     };
 
 export interface IInputHandlers {

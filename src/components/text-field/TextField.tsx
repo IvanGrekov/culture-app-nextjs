@@ -3,6 +3,7 @@
 import cx from 'classnames';
 
 import InputContainer from 'components/input-container/InputContainer';
+import HelperIcon from 'components/text-field/HelperIcon';
 import PasswordIcon from 'components/text-field/PasswordIcon';
 import styles from 'components/text-field/TextField.module.scss';
 import { useTextField } from 'components/text-field/hooks';
@@ -21,6 +22,9 @@ export default function TextField({
     placeholder = label || 'Enter value',
     shouldHidePlaceholder,
     inputMode,
+    placeholderVariant,
+    Icon,
+    iconSize,
     containerClassName,
     textFieldWrapperClassName,
     labelClassName,
@@ -81,6 +85,7 @@ export default function TextField({
                             [styles['input--error']]: error,
                             [styles['input--disabled']]: disabled,
                             [styles['input--password']]: isPasswordInput,
+                            [styles['input--with-icon']]: !!Icon,
                         },
                         className,
                     )}
@@ -109,11 +114,20 @@ export default function TextField({
                         disabled={disabled}
                         isFieldFilled={isInputFilled}
                         error={error}
+                        variant={placeholderVariant}
                         className={cx(placeholderClassName, {
                             [styles['placeholder--limited']]: isPasswordInput,
                         })}
                     />
                 )}
+
+                <HelperIcon
+                    id={id}
+                    error={error}
+                    disabled={disabled}
+                    Icon={Icon}
+                    iconSize={iconSize}
+                />
 
                 <PasswordIcon
                     type={type}

@@ -26,6 +26,7 @@ export default function Select<T>({
     shouldHidePlaceholder,
     multiple,
     shouldCloseOnChange = multiple ? false : true,
+    shouldAddSearch,
     containerClassName,
     labelClassName,
     placeholderClassName,
@@ -184,6 +185,7 @@ export default function Select<T>({
                             error={error}
                             multiple={multiple}
                             isOptionsFixed={isOptionsFixed}
+                            shouldAddSearch={shouldAddSearch}
                             onChange={onSelectChange}
                             getOptionLabel={getOptionLabel}
                             getOptionValue={getOptionValue}

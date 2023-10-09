@@ -42,6 +42,7 @@ export type TSelectProps<T> = TSelectBaseProps & {
     value: TSelectValue<T>;
     options: T[];
     shouldCloseOnChange?: boolean;
+    shouldAddSearch?: boolean;
     onChange: TOnSelectChange<T>;
     getOptionLabel?: TGetOptionLabel<T>;
     getOptionValue?: TGetOptionValue<T>;

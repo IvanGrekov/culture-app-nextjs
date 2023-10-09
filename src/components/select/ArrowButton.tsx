@@ -5,8 +5,8 @@ import cx from 'classnames';
 import IconButton from 'components/button/IconButton';
 import ArrowIcon from 'components/icons/ArrowIcon';
 import styles from 'components/select/Select.module.scss';
-import { SELECT_ICON_SIZE } from 'components/select/constants';
 import { TSelectBaseProps } from 'components/select/types';
+import { INPUT_HELPER_ICON_SIZE } from 'constants/input.constants';
 
 type TArrowButtonProps = Pick<
     TSelectBaseProps,
@@ -29,7 +29,7 @@ const ArrowButton = (
     return (
         <IconButton
             ref={ref}
-            iconSize={SELECT_ICON_SIZE}
+            iconSize={INPUT_HELPER_ICON_SIZE}
             Icon={ArrowIcon}
             tabIndex={-1}
             className={cx(

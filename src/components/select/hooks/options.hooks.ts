@@ -1,5 +1,7 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect, useMemo, RefObject } from 'react';
 
+import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
+import { defaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 import {
     getSelectOptionsHeight,
     getIsOptionsFixed,
@@ -56,4 +58,53 @@ export const useFixedSelectOptions: TUseFixedSelectOptions = ({
     }, [isOpen, customSelectRef, selectOptionsRef]);
 
     return { isOptionsFixed };
+};
+
+type TUseFilteredOptionsArgs<T> = Pick<
+    TSelectProps<T>,
+    'options' | 'getOptionLabel'
+> &
+    Pick<TUseSelectFieldResult<T>, 'isOpen'>;
+
+type TUseFilteredOptionsResult<T> = {
+    filteredOptions: TSelectProps<T>['options'];
+    search: string;
+    setSearch: (value: string) => void;
+};
+
+export const useFilteredOptions = <T>({
+    isOpen,
+    options,
+    getOptionLabel = defaultGetOptionLabel,
+}: TUseFilteredOptionsArgs<T>): TUseFilteredOptionsResult<T> => {
+    const [search, setSearch] = useState('');
+
+    useEffect(() => {
+        if (!isOpen) {
+            // Need because of animation
+            const timeoutId = setTimeout(() => {
+                setSearch('');
+            }, 200);
+
+            return (): void => clearTimeout(timeoutId);
+        }
+    }, [isOpen]);
+
+    const filteredOptions = useMemo(() => {
+        if (!search) {
+            return options;
+        }
+
+        return options.filter((option) => {
+            const optionLabel = getOptionLabel(option);
+
+            return optionLabel.toLowerCase().includes(search.toLowerCase());
+        });
+    }, [options, search, getOptionLabel]);
+
+    return {
+        filteredOptions,
+        search,
+        setSearch,
+    };
 };

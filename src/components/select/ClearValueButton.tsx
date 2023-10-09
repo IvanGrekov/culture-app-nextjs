@@ -5,8 +5,8 @@ import cx from 'classnames';
 import IconButton from 'components/button/IconButton';
 import CloseIcon from 'components/icons/CloseIcon';
 import styles from 'components/select/Select.module.scss';
-import { SELECT_ICON_SIZE } from 'components/select/constants';
 import { TSelectProps } from 'components/select/types';
+import { INPUT_HELPER_ICON_SIZE } from 'constants/input.constants';
 
 type TClearValueButtonProps<T> = Pick<
     TSelectProps<T>,
@@ -24,7 +24,7 @@ export default function ClearValueButton<T>({
 
     return (
         <IconButton
-            iconSize={SELECT_ICON_SIZE}
+            iconSize={INPUT_HELPER_ICON_SIZE}
             onClick={onClick}
             Icon={CloseIcon}
             tabIndex={-1}

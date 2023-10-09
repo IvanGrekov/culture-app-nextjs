@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 import cx from 'classnames';
 
+import IconButton from 'components/button/IconButton';
 import EyeIcon from 'components/icons/EyeIcon';
 import HiddenEyeIcon from 'components/icons/HiddenEyeIcon';
 import styles from 'components/text-field/TextField.module.scss';
@@ -23,8 +24,6 @@ export default function PasswordIcon({
         return null;
     }
 
-    disabled;
-
     const onClick = (): void => {
         setIsValueVisible((prev) => !prev);
     };
@@ -33,15 +32,15 @@ export default function PasswordIcon({
     const Icon = isValueVisible ? HiddenEyeIcon : EyeIcon;
 
     return (
-        <button
+        <IconButton
+            iconSize={30}
+            Icon={Icon}
             title={title}
-            className={cx(styles.icon, {
+            className={cx(styles['password-icon'], styles.icon, {
                 [styles['icon--error']]: error,
                 [styles['icon--disabled']]: disabled,
             })}
             onClick={onClick}
-        >
-            <Icon size={30} />
-        </button>
+        />
     );
 }

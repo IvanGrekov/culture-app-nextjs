@@ -24,7 +24,7 @@ export const useTextField: TUseTextField = ({ type, ...rest }) => {
 
     useEffect(() => {
         setIsInputFilled(Boolean(inputRef.current?.value));
-    }, []);
+    }, [inputRef.current?.value]);
 
     const inputType = type === 'password' && isValueVisible ? 'text' : type;
     const inputHandlers = getInputHandlers({

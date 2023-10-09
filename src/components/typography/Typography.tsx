@@ -15,6 +15,7 @@ interface ITypographyProps {
     variant?: TTypographyVariants;
     lineClamp?: number | 'none';
     maxLength?: number;
+    textOverflow?: 'ellipsis' | 'clip' | 'unset' | 'initial' | 'inherit';
     style?: CSSProperties;
     className?: string;
 }
@@ -25,6 +26,7 @@ export default function Typography({
     variant = 'body1',
     lineClamp = 'none',
     maxLength,
+    textOverflow = 'ellipsis',
     style = {},
     className,
 }: ITypographyProps): JSX.Element {
@@ -43,6 +45,7 @@ export default function Typography({
             )}
             style={{
                 WebkitLineClamp: lineClamp,
+                textOverflow,
                 ...style,
             }}
         >

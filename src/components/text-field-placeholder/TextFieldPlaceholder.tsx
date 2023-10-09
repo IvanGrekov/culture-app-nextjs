@@ -3,10 +3,15 @@ import { forwardRef, Ref } from 'react';
 import cx from 'classnames';
 
 import InputLabelRequiredMark from 'components/input-label-required-mark/InputLabelRequiredMark';
-import TextFieldLabelText from 'components/text-field-label-text/TextFieldLabelText';
+import TextFieldLabelText, {
+    ITextFieldLabelTextProps,
+} from 'components/text-field-label-text/TextFieldLabelText';
 import styles from 'components/text-field-placeholder/TextFieldPlaceholder.module.scss';
 
-interface ITextFieldPlaceholderProps {
+export type TTextFieldPlaceholderProps = Pick<
+    ITextFieldLabelTextProps,
+    'variant'
+> & {
     htmlFor: string;
     placeholder?: string;
     isFieldFilled: boolean;
@@ -14,7 +19,7 @@ interface ITextFieldPlaceholderProps {
     required?: boolean;
     disabled?: boolean;
     className?: string;
-}
+};
 
 const TextFieldPlaceholder = (
     {
@@ -24,8 +29,9 @@ const TextFieldPlaceholder = (
         error,
         required,
         disabled,
+        variant,
         className,
-    }: ITextFieldPlaceholderProps,
+    }: TTextFieldPlaceholderProps,
     ref: Ref<HTMLLabelElement>,
 ): JSX.Element | null => {
     if (!placeholder || isFieldFilled) {
@@ -46,7 +52,7 @@ const TextFieldPlaceholder = (
             )}
         >
             <>
-                <TextFieldLabelText text={placeholder} />
+                <TextFieldLabelText text={placeholder} variant={variant} />
 
                 <InputLabelRequiredMark
                     required={required}

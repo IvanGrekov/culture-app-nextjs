@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import styles from 'components/text-field-label-text/TextFieldLabelText.module.scss';
 import Typography from 'components/typography/Typography';
 
-interface ITextFieldLabelTextProps extends PropsWithChildren {
+export interface ITextFieldLabelTextProps extends PropsWithChildren {
     text: string;
     variant?: 'body1' | 'body2';
 }

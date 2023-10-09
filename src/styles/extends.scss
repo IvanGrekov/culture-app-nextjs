@@ -124,6 +124,19 @@
     }
 }
 
+.input-icon-abs-position-extend {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    right: calc(#{$input-inline-spacing} * 1.15);
+}
+
+.input-button-icon-abs-position-extend {
+    @extend .input-icon-abs-position-extend;
+
+    right: calc(#{$input-inline-spacing} * 0.7);
+}
+
 .input-disabled-state-extend {
     @extend .cursor-not-allowed-extend;
     color: var(--disabled);

@@ -1,7 +1,9 @@
 import cx from 'classnames';
 
+import SearchField from 'components/search-field/SearchField';
 import OptionItem from 'components/select/OptionItem';
 import styles from 'components/select/Select.module.scss';
+import { useFilteredOptions } from 'components/select/hooks/options.hooks';
 import { TSelectProps, TUseSelectFieldResult } from 'components/select/types';
 import { defaultGetOptionLabel } from 'components/select/utils/optionItem.utils';
 
@@ -12,6 +14,7 @@ type TOptionsProps<T> = Pick<
     | 'options'
     | 'error'
     | 'multiple'
+    | 'shouldAddSearch'
     | 'getOptionLabel'
     | 'getOptionValue'
     | 'getIsOptionDisabled'
@@ -29,9 +32,16 @@ export default function Options<T>({
     selectOptionsRef,
     isOpen,
     isOptionsFixed,
-    getOptionValue = defaultGetOptionLabel,
+    shouldAddSearch,
+    getOptionLabel = defaultGetOptionLabel,
     ...props
 }: TOptionsProps<T>): JSX.Element {
+    const { filteredOptions, search, setSearch } = useFilteredOptions<T>({
+        isOpen,
+        options,
+        getOptionLabel,
+    });
+
     return (
         <div
             ref={selectOptionsRef}
@@ -41,11 +51,26 @@ export default function Options<T>({
                 [styles['options--error']]: error,
             })}
         >
-            {options.map((option) => (
+            {shouldAddSearch && (
+                <SearchField
+                    value={search}
+                    placeholderVariant="body2"
+                    className={styles['search-field']}
+                    containerClassName={styles['search-field__container']}
+                    textFieldWrapperClassName={
+                        styles['search-field__text-field-wrapper']
+                    }
+                    iconSize={15}
+                    onChange={(e): void => setSearch(e.target.value)}
+                    onClick={(e): void => e.stopPropagation()}
+                />
+            )}
+
+            {filteredOptions.map((option) => (
                 <OptionItem
-                    key={getOptionValue(option)}
+                    key={getOptionLabel(option)}
                     option={option}
-                    getOptionValue={getOptionValue}
+                    getOptionLabel={getOptionLabel}
                     {...props}
                 />
             ))}
